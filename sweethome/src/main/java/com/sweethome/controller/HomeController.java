@@ -1,4 +1,4 @@
-package com.sweethome.mvc;
+package com.sweethome.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
