@@ -20,7 +20,7 @@
 				<ul>
 					<li><a href="#intro">인사말</a></li>
 					<li><a href="#one">스위트 홈 이란?</a></li>
-					<li><a href="#two">우리 단체가 하는 일</a></li>
+					<li><a href="#two">후원하기</a></li>
 					<li><a href="#three">로그인</a></li>
 				</ul>
 			</nav>

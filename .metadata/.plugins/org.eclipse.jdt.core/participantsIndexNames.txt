@@ -1,7 +1,5 @@
 INDEX VERSION 1.131
 C:\Users\LEEJUNMIN\Documents\GitHub\sweetHome\sweethome\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3815482147.index
 \sweethome\src\main\java
-C:\Users\LEEJUNMIN\Documents\GitHub\sweetHome\sweethome\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\203304439.index
-\sweethome\src\main\java
 C:\Users\LEEJUNMIN\Documents\GitHub\sweetHome\sweethome\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2138618707.index
 \sweethome\src\main\java
