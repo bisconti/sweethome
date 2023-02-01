@@ -34,7 +34,7 @@
 	</header>
     <div id="wrapper">
         <!-- Main -->
-        <section id="main" class="wrapper">
+        <section id="main" class="lesky">
             <div class="lor-content joinbox">
                 <form name="joinForm" method="post" action="${cp}/user/userjoinok.us" onsubmit="return sendit();">
                     <div class="joinbox">
