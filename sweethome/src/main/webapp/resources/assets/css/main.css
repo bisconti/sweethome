@@ -608,6 +608,392 @@ form input::file-selector-button {
 /* index end */
 /* 준민 끝 */
 
+/* 이하늘 시작 */
+/* join */
+.login-form-field {
+   width: 100%;
+   border: none;
+   margin-bottom: 10px;
+   border-radius: 3px;
+   outline: none;
+   padding: 0px 0px 5px 5px;
+}
+  
+#login-form-submit {
+   width: 100%;
+   border: none;
+   font-weight: bold;
+   background-color:mediumseagreen;
+   cursor: pointer;
+   outline: none;
+   margin: 0 !important;
+}
+#wrapper{
+   width: 40%;
+   margin: 0 auto;
+}
+input::placeholder {color:rgb(211, 211, 211) !important;}
+input::-webkit-input-placeholder {color:mediumseagreen;}
+input:-ms-input-placeholder {color:mediumseagreen;}
+
+#joinbox{
+   width: 100%;
+   height: 50px;
+}
+
+
+#userid-field{
+   border: solid 1px mediumseagreen;
+   width: 60%;
+   float: left;
+}
+#user_id_btn{
+   text-align: center;
+   margin-left: 10px;
+   width: 35%;
+   background-color:  mediumseagreen;
+}
+#userpw-field, #userpw_re, #username{
+   border: solid 1px mediumseagreen;
+   width: 100%;
+   height: 46px;
+}
+.gender_area{
+   width: 100%;
+}
+.radiolabel{
+   width: 50px;
+   color: mediumseagreen;
+   margin: 10px;
+   float: left;
+}
+#sample6_postcode {
+   border: solid 1px mediumseagreen;
+   width: 50%;
+   float: left;
+}
+ #sample6_address, #useraddrdetail, #sample6_detailAddress{
+   border: solid 1px mediumseagreen;
+   width: 100%;
+   margin-bottom: 10px;
+}
+#sample6_postcode_btn{
+   text-align: center;
+   background-color: mediumseagreen;
+   width: 45%;
+   margin-left: 10px;
+}
+.zipcode_area{
+   margin-bottom: 10px;
+}
+#userbirth{
+   width: 100%;
+   height: 80px;
+   margin-bottom: 10px;
+}
+.box{
+   width: 20px;
+   margin-bottom: 10px;
+   border: solid 1px red;
+   float: left;
+}
+#userphone, #userNum{
+   border: solid 1px mediumseagreen;
+   width: 60%;
+   margin-bottom: 10px;
+   float: left;
+}
+#userphone_btn, #correct_check{
+   text-align: center;
+   background-color: mediumseagreen;
+   width: 35%;
+   margin-left: 15px;
+   margin-bottom: 10px;
+}
+.lor-content{
+   margin-top: 50px;
+    width: 60%;
+    margin: 0 auto;
+}
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: mediumseagreen;
+}
+input[type="date"]{
+    text-align: center;
+    background-color: floralwhite;
+    border: none;
+    outline: none;
+}
+#birth{
+    border: solid 1px mediumseagreen;
+}
+.birth{
+    text-align: center;
+   color: mediumseagreen;
+}
+#main{
+    padding-top: 50px;
+    margin: 0 auto;
+}
+.btn-submit{
+   width: 100%;
+   margin-right: 30px;
+}
+
+/* 이하늘 끝 */
+
+/* 이승규 시작*/
+/* 아이디찾기 */
+.checkpw {
+   color: #000 !important;
+   font-weight: bold;
+}
+
+.checkid {
+   width: 500px;
+   margin: 0 auto;
+   margin-top: -60px;
+}
+
+.idsearchbox {
+   margin-bottom: 20px;
+
+}
+
+div>#userphone {
+   width: 66%;
+   float: left;
+}
+
+div>#userphone_btn {
+   width: 33%;
+   margin-left: 5px;
+   background-color: #3cb371;
+   cursor: pointer;
+}
+
+div>#userNum {
+   width: 66%;
+   float: left;
+}
+
+div>#correct_check {
+   width: 33%;
+   margin-left: 5px;
+   background-color: #3cb371;
+   cursor: pointer;
+}
+
+
+.inner {
+   text-align: center;
+}
+
+.pwsubmit {
+   padding-top: 30px;
+}
+
+div>#userphone_btn {
+   color: #fff !important;
+}
+
+div>#correct_check {
+   color: #fff !important;
+}
+
+/* 아이디찾기성공뷰 */
+
+.idsearch_container {
+   width: 500px;
+}
+
+.resultid_container {
+   color: #20313d !important;
+   border: 3px solid #3cb371;
+   width: 600px;
+
+}
+
+.resultid_title {
+   color: black;
+   font-weight: bold;
+   font-size: 20px;
+}
+
+#pwsearch {
+   text-decoration: none;
+   color: white;
+   font-size: 14px;
+
+}
+
+.idsearch_container {
+   margin: 0 auto;
+   margin-top: -30px;
+   margin-bottom: 50px;
+   height: 60%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+
+}
+
+.login {
+   margin-top: 100px;
+}
+
+#result_id {
+   margin-top: 20px;
+   display: block;
+   text-align: center;
+}
+
+.pw_Search {
+   margin-top: 25px;
+   margin-bottom: 20px;
+}
+
+/* 비밀번호찾기 */
+.checkid {
+   width: 500px;
+   margin: 0 auto;
+   margin-top: -60px;
+}
+
+div>#userphone {
+   width: 66%;
+   float: left;
+}
+
+div>#userphone_btn {
+   width: 33%;
+   margin-left: 5px;
+   background-color: #3cb371;
+   cursor: pointer;
+}
+
+div>#userNum {
+   width: 66%;
+   float: left;
+}
+
+div>#correct_check {
+   width: 33%;
+   margin-left: 5px;
+   background-color: #3cb371;
+   cursor: pointer;
+}
+
+/* 비밀번호찾기성공 */
+.gender_area>td {
+   font-size: 16px;
+}
+
+#all {
+   width: 500px;
+   height: 100%;
+   color: white;
+   margin: 0 auto;
+   margin-top: -10%;
+   margin-bottom: 30px;
+}
+
+
+.btn_right>input[type="button"] {
+   float: right;
+   margin-right: 20px;
+}
+
+div>#submit {
+   width: 100%;
+   border-radius: 2em;
+   background-color: #3cb371;
+   color: #fff !important;
+   font-weight: bold;
+   margin: 0 auto;
+   line-height: 10px;
+}
+
+.inner {
+   text-align: center;
+}
+
+.pwsubmit {
+   padding-top: 30px;
+   text-align: center;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+   background: rgba(255, 255, 255, 0.05);
+
+   border: solid 2px #3cb371;
+}
+
+/* 상품관리 */
+.tg {
+   border-collapse: collapse;
+   border-color: #bbb;
+   border-spacing: 0;
+   width: 700px;
+   margin: 0 auto;
+   margin-bottom: 30px;
+}
+
+.tg td {
+   background-color: #E0FFEB;
+   border-color: #bbb;
+   border-style: solid;
+   border-width: 1px;
+   color: #594F4F;
+   font-family: Arial, sans-serif;
+   font-size: 14px;
+   overflow: hidden;
+   padding: 10px 5px;
+   word-break: normal;
+   text-align: center;
+}
+
+.tg th {
+   background-color: #9DE0AD;
+   border-color: #bbb;
+   border-style: solid;
+   border-width: 2px;
+   color: #493F3F;
+   font-family: Arial, sans-serif;
+   font-size: 14px;
+   font-weight: normal;
+   overflow: hidden;
+   padding: 10px 5px;
+   word-break: normal;
+}
+
+.tg .tg-1wig {
+   font-weight: bold;
+   text-align: center;
+   vertical-align: top
+}
+
+.tg .tg-0lax {
+   text-align: center;
+}
+
+.tablesheeet {
+   width: 1000px;
+   margin: 0 auto;
+   color: black;
+   border: 1px solid black !important;
+}
+/* 이승규 끝 */
+
 /* Basic */
 
 	@-ms-viewport {
