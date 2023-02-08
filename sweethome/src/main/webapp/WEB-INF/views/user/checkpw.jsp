@@ -85,7 +85,7 @@
             </div>
         </section>
     </div>
-    <form method="post" action="#">
+    <form name="joinForm" method="post" action="${cp}/user/searchpwok.us" onsubmit="return pwSearch();"></form>
         <div class="checkid">
             <div class="idsearchbox">
                 <label for="name">아이디</label>
@@ -146,5 +146,73 @@
     <script src="assets/js/main.js"></script>
 
 </body>
-
+<script>
+var code2 = "";
+$('#userphone_btn').click(function() {
+    const userphone = $('#userphone').val();
+     if(userphone.length == 13){ 
+      alert('인증번호가 전송되었습니다. 확인해주세요 !');
+      $.ajax ({
+         url: '${cp}/user/send_msg.us',
+         type: 'GET',
+         async: false,
+         data: {
+            "userphone" : userphone
+         },
+          success: function(data) {
+            var checkNum = data;
+            alert(data);
+            alert('checkNum:'+ checkNum);
+            
+            $('#correct_check').click(function() {   
+               const userNum = $('#userNum').val();
+               
+               if(checkNum == userNum) {
+                  alert('인증 성공하였습니다.');
+                  $("#userphone").attr("readonly",true);
+                  code2 = data;
+                  console.log(code2);
+               }
+               else {
+                  alert('인증 실패하였습니다. 다시 입력해주세요.');
+               }
+            });
+            
+         }
+      });
+     }
+    else {
+       alert('휴대폰번호를 정확하게 입력해주세요 !')
+    } 
+   });
+   
+   
+function pwSearch() {
+const joinForm = document.joinForm;
+    
+    const userid = joinForm.userid;
+    if(userid.value == ""){
+        alert("아이디를 입력하세요!")
+        userid.focus();
+        return false;
+    }
+    if(userid.value.length < 5 || userid.value.length > 12){
+        alert("아이디는 5자 이상 12자 이하로 입력하세요!");
+        userid.focus();
+        return false;
+    }
+    
+    const userphone = joinForm.userphone;
+    if(userphone.value.length != 13){
+       alert("휴대폰번호를 입력해주세요 !");
+       return false;
+    }
+    if(code2 == ""){
+       alert("휴대폰번호 인증 실패입니다!")
+       return false;
+    }
+    return true;
+}
+</script>
+<script src="${cp}/app/user/user.js"></script>
 </html>

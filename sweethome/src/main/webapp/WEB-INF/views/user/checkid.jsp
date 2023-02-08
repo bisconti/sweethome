@@ -77,7 +77,9 @@ textarea {
             </div>
         </section>
     </div>
-    <form method="post" action="#">
+    <div class="idSearch">
+        <form name="joinForm" action="${cp}/user/searchidok.us" method="post" 
+           accept-charset="utf-8" onsubmit="return idSearch();" >
         <div class="checkid">
             <div class="idsearchbox">
                 <label for="name">이름</label>
@@ -140,5 +142,93 @@ textarea {
     <script src="assets/js/main.js"></script>
 
 </body>
-
+<script>
+var code2= "";
+ $('#userphone_btn').click(function() {
+     const userphone = $('#userphone').val();
+       const xhr = new XMLHttpRequest();
+       if(userphone == ""){
+       alert("핸드폰 번호를 입력하세요 !");
+       userid.focus();
+       return false;
+    }
+    else if(userphone.length == 13){
+    xhr.onreadystatechange = function(){
+       if(xhr.readyState == 4){
+          if(xhr.status == 200){
+             let txt = xhr.responseText;
+             txt = txt.trim();
+             if(txt == "O"){
+                alert("사용할 수 있는 번호");
+                alert('인증번호가 전송되었습니다. 확인해주세요 !');
+                $.ajax ({
+                   url: '${cp}/user/send_msg.us',
+                   type: 'GET',
+                   async: false,
+                   data: {
+                      "userphone" : userphone
+                   },
+                    success: function(data) {
+                      var checkNum = data;
+                      alert(data);
+                      
+                      $('#correct_check').click(function() {   
+                         const userNum = $('#userNum').val();
+                         
+                         if(checkNum == userNum) {
+                            alert('인증 성공하였습니다.');
+                            $("#userphone").attr("readonly",true);
+                            code2 = data;
+                            console.log(code2);
+                         }
+                         else {
+                            alert('인증 실패하였습니다. 다시 입력해주세요.');
+                         }
+                      });
+                      
+                   }
+                });
+             }
+             else{
+                alert("이미 가입된 번호입니다.")
+                userphone.value = "";
+                userphone.focus();
+             }
+          }
+       }
+    }
+    }else {
+        alert('휴대폰번호를 정확하게 입력해주세요 !')
+    } 
+    xhr.open("GET",cp+"/user/checkphoneok.us?userphone="+userphone,true);
+    xhr.send();
+ });
+ function idSearch() {
+   const joinForm = document.joinForm;
+   
+   const username = joinForm.username;
+    if(username.value == ""){
+        alert("이름을 입력하세요!");
+        username.focus();
+        return false;
+    }
+    const exp_name = /^[가-힣]+$/;
+    if(!exp_name.test(username.value)){
+        alert("이름에는 한글만 입력하세요!");
+        username.focus();
+        return false;
+    }
+    const userphone = joinForm.userphone;
+    if(userphone.value.length != 13){
+       alert("휴대폰번호를 입력해주세요 !");
+       return false;
+    }
+    if(code2 == ""){
+       alert("휴대폰번호 인증 실패입니다!")
+       return false;
+    }
+    return true;
+}
+</script>
+<script src="${cp}/views/user/user.js"></script>
 </html>

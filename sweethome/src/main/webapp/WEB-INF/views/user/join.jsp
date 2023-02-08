@@ -34,11 +34,14 @@
 	</header>
     <div id="wrapper">
         <!-- Main -->
-        <section id="main" class="lesky">
+        <section id="main" class="wrapper">
             <div class="lor-content joinbox">
                 <form name="joinForm" method="post" action="${cp}/user/userjoinok.us" onsubmit="return sendit();">
                     <div class="joinbox">
-                        <input type="text" name="userid" id="userid-field" class="login-form-field"
+                        <p id="result" colspan="2" style="color: black !important;"></p> 
+                     </div>
+                    <div class="joinbox">
+                        <input type="text" name="userid" id="userid-field" class="logi                                                                                                                                   n-form-field"
                             placeholder="아이디를 입력해주세요">
                         <input type="button" id="user_id_btn" value="중복검사" onclick="checkId()">
                     </div>
@@ -122,4 +125,70 @@
 		</div>
 	</footer>
 </body>
+<script>
+    const cp = "${cp}";
+ </script>
+ <script>
+ var code2= "";
+ $('#userphone_btn').click(function() {
+     const userphone = $('#userphone').val();
+       const xhr = new XMLHttpRequest();
+       if(userphone == ""){
+       alert("핸드폰 번호를 입력하세요 !");
+       userid.focus();
+       return false;
+    }
+    else if(userphone.length == 13){
+    xhr.onreadystatechange = function(){
+       if(xhr.readyState == 4){
+          if(xhr.status == 200){
+             let txt = xhr.responseText;
+             txt = txt.trim();
+             if(txt == "O"){
+                alert("사용할 수 있는 번호");
+                alert('인증번호가 전송되었습니다. 확인해주세요 !');
+                $.ajax ({
+                   url: '${cp}/user/send_msg.us',
+                   type: 'GET',
+                   async: false,
+                   data: {
+                      "userphone" : userphone
+                   },
+                    success: function(data) {
+                      var checkNum = data;
+                      alert(data);
+                      
+                      $('#correct_check').click(function() {   
+                         const userNum = $('#userNum').val();
+                         
+                         if(checkNum == userNum) {
+                            alert('인증 성공하였습니다.');
+                            $("#userphone").attr("readonly",true);
+                            code2 = data;
+                            console.log(code2);
+                         }
+                         else {
+                            alert('인증 실패하였습니다. 다시 입력해주세요.');
+                         }
+                      });
+                      
+                   }
+                });
+             }
+             else{
+                alert("이미 가입된 번호입니다.")
+                userphone.value = "";
+                userphone.focus();
+             }
+          }
+       }
+    }
+    }else {
+        alert('휴대폰번호를 정확하게 입력해주세요 !')
+    } 
+    xhr.open("GET",cp+"/user/checkphoneok.us?userphone="+userphone,true);
+    xhr.send();
+ });
+</script>
+<script src="${cp}/views/user/user.js"></script>
 </html>

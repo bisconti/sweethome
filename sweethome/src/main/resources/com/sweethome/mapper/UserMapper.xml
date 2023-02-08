@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweethome.mapper.UserMapper">
+   <!-- md5('문자열') : 단방향 암호화 함수 -->
+   <!-- binary('문자열') : 대소문자까지 비교 -->
+   <insert id="join">
+      insert into user values(#{userid},md5(#{userpw}),#{username}, #{usergender},#{zipcode},#{usergender}, #{useraddr},#{useraddrdetail},#{useraddretc},#{userbirth},#{userphone})
+   </insert>
+   <select id="login" resultType="com.sweethome.domain.UserDTO">
+      select * from user where userid=#{userid} and userpw=#{userpw}
+   </select>
+   <select id="checkid" resultType="string">
+      select userid from user where userphone=#{userphone} and username=#{username}
+   </select>
+   <select id="checkpw" resultType="_int">
+      select count(*) from user where userid=#{userid} and userphone=#{userphone}
+   </select>
+   <update id="updatepw">
+      update user set userpw=#{userpw} where userid=#{userid}
+   </update>
+   <select id="goshopping" resultType="com.sweethome.domain.ProductDTO">
+	  select * from product
+   </select>	
+   <insert id="insertshoppinglist">
+   	  insert into shoppinglist values(#{userid},#{productnum})
+   </insert>
+   <select id="showshoppinglist" resultType="com.sweethome.domain.ProductDTO">
+   	  select * from product p join shoppinglist sl on p.productnum = sl.productnum where userid = #{userid}	
+   </select>
+   <delete id="deleteshoppinglist">
+   	  delete from shoppinglist list where userid = #{userid}
+   </delete>
+</mapper>
