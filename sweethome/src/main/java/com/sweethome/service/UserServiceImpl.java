@@ -83,31 +83,7 @@ public class UserServiceImpl implements UserService {
    @Override
    public void goshopping(HttpServletRequest req) {
 	   List<ProductDTO> product = mapper.goshopping(req);
-	   ProductDTO product1 = product.get(0);
-	   ProductDTO product2 = product.get(1);
-	   ProductDTO product3 = product.get(2);
-	   ProductDTO product4 = product.get(3);
-	   ProductDTO product5 = product.get(4);
-	   ProductDTO product6 = product.get(5);
-	   ProductDTO product7 = product.get(6);
-	   ProductDTO product8 = product.get(7);
-	   ProductDTO product9 = product.get(8);
-	   ProductDTO product10 = product.get(9);
-	   ProductDTO product11 = product.get(10);
-	   ProductDTO product12 = product.get(11);
-	
-	   req.setAttribute("product1", product1);
-	   req.setAttribute("product2", product2);
-	   req.setAttribute("product3", product3);
-	   req.setAttribute("product4", product4);
-	   req.setAttribute("product5", product5);
-	   req.setAttribute("product6", product6);
-	   req.setAttribute("product7", product7);
-	   req.setAttribute("product8", product8);
-	   req.setAttribute("product9", product9);
-	   req.setAttribute("product10", product10);
-	   req.setAttribute("product11", product11);
-	   req.setAttribute("product12", product12);
+	   req.setAttribute("product", product);
    }
 
    @Override

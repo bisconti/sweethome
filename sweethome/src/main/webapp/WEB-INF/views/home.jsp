@@ -152,12 +152,12 @@
                         <div class="field half">
                            <label for="name" style="color: mediumseagreen;">아이디</label>
                            <input type="text" name="userid" id="name"
-                              style="border: 1px solid mediumseagreen;" />
+                              style="border: 1px solid mediumseagreen; color: black;" />
                         </div>
                         <div class="field half">
                            <label for="email" style="color: mediumseagreen;">비밀번호</label>
                            <input type="password" name="userpw" id="email"
-                              style="border: 1px solid mediumseagreen;" />
+                              style="border: 1px solid mediumseagreen; color: black;" />
                         </div>
                      </div>
                      <ul class="actions">

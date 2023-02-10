@@ -41,35 +41,35 @@
 			<form action="${cp}/user/basket" method="post" name="orderForm" id="orderForm" class="orderForm">
 				<div id="product_line1">
 					<div id="product1" class="scale">
-						<img src="${cp}/resources/product/${product1.productphoto}" alt="" id="sanitary">
-						<p>${product1.productname}</p>
+						<img src="${cp}/resources/product/${product.get(0).productphoto}" alt="" id="sanitary">
+						<p>${product.get(0).productname}</p>
 						<div id="control_amount">
                     		<input type='button' id="minus" onclick='count("minus")' value='ㅡ' />
                     		<input type="hidden" name="userid" value="${user.userid}">
                     		<input type="hidden" name="result" id="results">
-                    		<input type="hidden" name="product1num" value="${product1.productnum}">
+                    		<input type="hidden" name="product1num" value="${product.get(0).productnum}">
 							<div id="result">0</div>
 							<input type='button' id="plus" onclick='count("plus")' value='╉' />
 						</div>
 					</div>
 					<div id="product1" class="scale">
-						<img src="${cp}/resources/product/${product2.productphoto}" alt="" id="sanitary">
-						<p>${product2.productname}</p>
+						<img src="${cp}/resources/product/${product.get(1).productphoto}" alt="" id="sanitary">
+						<p>${product.get(1).productname}</p>
 						<div id="control_amount">
 							<input type='button' id="minus" onclick='count("minus1")' value='ㅡ' />
 							<input type="hidden" name="result1" id="results1">
-							<input type="hidden" name="product2num" value="${product2.productnum}">
+							<input type="hidden" name="product2num" value="${product.get(1).productnum}">
 							<div id="result1">0</div>
 							<input type='button' id="plus" onclick='count("plus1")' value='╉' />
 						</div>
 					</div>
 					<div id="product1" class="scale">
-						<img src="${cp}/resources/product/${product3.productphoto}" alt="" id="sanitary">
-						<p>${product3.productname}</p>
+						<img src="${cp}/resources/product/${product.get(2).productphoto}" alt="" id="sanitary">
+						<p>${product.get(2).productname}</p>
 						<div id="control_amount">
 							<input type='button' id="minus" onclick='count("minus2")' value='ㅡ' />
 							<input type="hidden" name="result2" id="results2">
-							<input type="hidden" name="product3num" value="${product3.productnum}">
+							<input type="hidden" name="product3num" value="${product.get(2).productnum}">
 							<div id='result2'>0</div>
 							<input type='button' id="plus" onclick='count("plus2")' value='╉' />
 						</div>
@@ -77,34 +77,34 @@
 				</div>
 				<div id="product_line2">
 					<div id="product1" class="scale">
-						<img src="${cp}/resources/product/${product4.productphoto}" alt="" id="sanitary">
-						<p>${product4.productname}</p>
+						<img src="${cp}/resources/product/${product.get(3).productphoto}" alt="" id="sanitary">
+						<p>${product.get(3).productname}</p>
 						<div id="control_amount">
 							<input type='button' id="minus" onclick='count("minus3")' value='ㅡ' />
 							<input type="hidden" name="result3" id="results3">
-							<input type="hidden" name="product4num" value="${product4.productnum}">
+							<input type="hidden" name="product4num" value="${product.get(3).productnum}">
 							<div id='result3'>0</div>
 							<input type='button' id="plus" onclick='count("plus3")' value='╉' />
 						</div>
 					</div>
 					<div id="product1" class="scale">
-						<img src="${cp}/resources/product/${product5.productphoto}" alt="" id="sanitary">
-						<p>${product5.productname}</p>
+						<img src="${cp}/resources/product/${product.get(4).productphoto}" alt="" id="sanitary">
+						<p>${product.get(4).productname}</p>
 						<div id="control_amount">
 							<input type='button' id="minus" onclick='count("minus4")' value='ㅡ' />
 							<input type="hidden" name="result4" id="results4">
-							<input type="hidden" name="product5num" value="${product5.productnum}">
+							<input type="hidden" name="product5num" value="${product.get(4).productnum}">
 							<div id='result4'>0</div>
 							<input type='button' id="plus" onclick='count("plus4")' value='╉' />
 						</div>
 					</div>
 					<div id="product1" class="scale">
-						<img src="${cp}/resources/product/${product6.productphoto}" alt="" id="sanitary">
-						<p>${product6.productname}</p>
+						<img src="${cp}/resources/product/${product.get(5).productphoto}" alt="" id="sanitary">
+						<p>${product.get(5).productname}</p>
 						<div id="control_amount">
 							<input type='button' id="minus" onclick='count("minus5")' value='ㅡ' />
 							<input type="hidden" name="result5" id="results5">
-							<input type="hidden" name="product6num" value="${product6.productnum}">
+							<input type="hidden" name="product6num" value="${product.get(5).productnum}">
 							<div id='result5'>0</div>
 							<input type='button' id="plus" onclick='count("plus5")' value='╉' />
 						</div>
@@ -112,34 +112,34 @@
 				</div>
 				<div id="product_line3">
 					<div id="product1" class="scale">
-						<img src="${cp}/resources/product/${product7.productphoto}" alt="" id="sanitary">
-						<p>${product7.productname}</p>
+						<img src="${cp}/resources/product/${product.get(6).productphoto}" alt="" id="sanitary">
+						<p>${product.get(6).productname}</p>
 						<div id="control_amount">
 							<input type='button' id="minus" onclick='count("minus6")' value='ㅡ' />
 							<input type="hidden" name="result6" id="results6">
-							<input type="hidden" name="product7num" value="${product7.productnum}">
+							<input type="hidden" name="product7num" value="${product.get(6).productnum}">
 							<div id='result6'>0</div>
 							<input type='button' id="plus" onclick='count("plus6")' value='╉' />
 						</div>
 					</div>
 					<div id="product1" class="scale">
-						<img src="${cp}/resources/product/${product8.productphoto}" alt="" id="sanitary">
-						<p>${product8.productname}</p>
+						<img src="${cp}/resources/product/${product.get(7).productphoto}" alt="" id="sanitary">
+						<p>${product.get(7).productname}</p>
 						<div id="control_amount">
 							<input type='button' id="minus" onclick='count("minus7")' value='ㅡ' />
 							<input type="hidden" name="result7" id="results7">
-							<input type="hidden" name="product8num" value="${product8.productnum}">
+							<input type="hidden" name="product8num" value="${product.get(7).productnum}">
 							<div id='result7'>0</div>
 							<input type='button' id="plus" onclick='count("plus7")' value='╉' />
 						</div>
 					</div>
 					<div id="product1" class="scale">
-						<img src="${cp}/resources/product/${product9.productphoto}" alt="" id="sanitary">
-						<p>${product9.productname}</p>
+						<img src="${cp}/resources/product/${product.get(8).productphoto}" alt="" id="sanitary">
+						<p>${product.get(8).productname}</p>
 						<div id="control_amount">
 							<input type='button' id="minus" onclick='count("minus8")' value='ㅡ' />
 							<input type="hidden" name="result8" id="results8">
-							<input type="hidden" name="product9num" value="${product9.productnum}">
+							<input type="hidden" name="product9num" value="${product.get(8).productnum}">
 							<div id='result8'>0</div>
 							<input type='button' id="plus" onclick='count("plus8")' value='╉' />
 						</div>
@@ -147,34 +147,34 @@
 				</div>
 				<div id="product_line4">
 					<div id="product1" class="scale">
-						<img src="${cp}/resources/product/${product10.productphoto}" alt="" id="sanitary">
-						<p>${product10.productname}</p>
+						<img src="${cp}/resources/product/${product.get(9).productphoto}" alt="" id="sanitary">
+						<p>${product.get(9).productname}</p>
 						<div id="control_amount">
 							<input type='button' id="minus" onclick='count("minus9")' value='ㅡ' />
 							<input type="hidden" name="result9" id="results9">
-							<input type="hidden" name="product10num" value="${product10.productnum}">
+							<input type="hidden" name="product10num" value="${product.get(9).productnum}">
 							<div id='result9'>0</div>
 							<input type='button' id="plus" onclick='count("plus9")' value='╉' />
 						</div>
 					</div>
 					<div id="product1" class="scale">
-						<img src="${cp}/resources/product/${product11.productphoto}" alt="" id="sanitary">
-						<p>${product11.productname}</p>
+						<img src="${cp}/resources/product/${product.get(10).productphoto}" alt="" id="sanitary">
+						<p>${product.get(10).productname}</p>
 						<div id="control_amount">
 							<input type='button' id="minus" onclick='count("minus10")' value='ㅡ' />
 							<input type="hidden" name="result10" id="results10">
-							<input type="hidden" name="product11num" value="${product11.productnum}">
+							<input type="hidden" name="product11num" value="${product.get(10).productnum}">
 							<div id='result10'>0</div>
 							<input type='button' id="plus" onclick='count("plus10")' value='╉' />
 						</div>
 					</div>
 					<div id="product1" class="scale">
-						<img src="${cp}/resources/product/${product12.productphoto}" alt="" id="sanitary">
-						<p>${product12.productname}</p>
+						<img src="${cp}/resources/product/${product.get(11).productphoto}" alt="" id="sanitary">
+						<p>${product.get(11).productname}</p>
 						<div id="control_amount">
 							<input type='button' id="minus" onclick='count("minus11")' value='ㅡ' />
 							<input type="hidden" name="result11" id="results11">
-							<input type="hidden" name="product12num" value="${product12.productnum}">
+							<input type="hidden" name="product12num" value="${product.get(11).productnum}">
 							<div id='result11'>0</div>
 							<input type='button' id="plus" onclick='count("plus11")' value='╉' />
 						</div>

@@ -39,27 +39,50 @@
 					<section id="main" class="wrapper">
 						<div class="inner">
 							<h1 class="major">장바구니</h1>
+							<form action="" name="orderform" id="orderform" method="post" class="orderform" onsubmit="noBack();">
+							<div class="row head" style="color: black;">
+								<div class="subdiv">
+									<div class="check">선택</div>
+									<div class="img">이미지</div>
+									<div class="pname">상품명 및 설명</div>
+									<div class="num">수량</div>
+									<div class="basketcmd">삭제</div>
+								</div>
+							</div>
 							<c:forEach begin="0" end="${product.size()-1}" var="i" step="1">
 							<c:if test="${product.get(i) != null}">
-								<div id="basket">
+								<div class="basketdiv" id="basket">
 									<div id="myproduct1">
+										<div id="check">
+											<label class="checkbox">
+												<input type="checkbox" name="buy" onclick="basket.checkItem();">
+												<span class="checkmark"></span>
+											</label>
+										</div>
 										<div id="product_img">
 											<img src="${cp}/resources/product/${product.get(i).productphoto}" alt="" id="product_img1">
 										</div>
 										<div id="product_name">
-											<p>${product.get(i).productname}</p>
-											<p style="margin: 0 auto;">${product.get(i).productcontents}</p>
+										<div id="product_name_contents">
+											<h3 style="text-align: center;">${product.get(i).productname}</h3>
+											<h5 style="text-align: center;">${product.get(i).productcontents}</h5>
+										</div>
 										</div>
 										<div id="product_amount">
 											<p>수량: 1</p>
-											<input type="button" value="삭제" id="delete">
+											<input type="button" value="삭제" id="delete" onclick="basket.delItem();">
 										</div>
 									</div>
 								</div>
 							</c:if>
 							</c:forEach>
+							<div class="right-align basketrowcmd">
+									<a href="javascript:void(0)" class="abutton" onclick="basket.delCheckedItem();">선택상품삭제</a>
+									<a href="javascript:void(0)" class="abutton" onclick="basket.delAllItem();">장바구니비우기</a>
+								</div>
+							</form>
 							<div id="order">
-								<a href=""><input type="button" value="주문하기" id="orderbutton"></a>
+								<a href=""><input type="submit" value="주문하기" id="orderbutton"></a>
 							</div>
 						</div>
 				</section>
@@ -100,6 +123,86 @@
 			<script src="${cp}/resources/assets/js/breakpoints.min.js"></script>
 			<script src="${cp}/resources/assets/js/util.js"></script>
 			<script src="${cp}/resources/assets/js/main.js"></script>
+<script>
+history.pushState(null, null, "${cp}/user/basket");
+window.onpopstate = function(event) {
+	history.go(1);
+};
+	
+let basket = {
+	    totalCount: 0, 
+	    totalPrice: 0,
+	    //체크한 장바구니 상품 비우기
+	    delCheckedItem: function(){
+	        document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
+	            item.parentElement.parentElement.parentElement.remove();
+	        });
+	        //AJAX 서버 업데이트 전송
+	    
+	        //전송 처리 결과가 성공이면
+	        this.reCalc();
+	        this.updateUI();
+	    },
+	    //장바구니 전체 비우기
+	    delAllItem: function(){
+	        document.querySelectorAll('.basketdiv').forEach(function (item) {
+	            item.remove();
+	          });
+	          //AJAX 서버 업데이트 전송
+	        
+	          //전송 처리 결과가 성공이면
+	          this.totalCount = 0;
+	          this.totalPrice = 0;
+	          this.reCalc();
+	          this.updateUI();
+	    },
+	    //재계산
+	    reCalc: function(){
+	        this.totalCount = 0;
+	        this.totalPrice = 0;
+	        document.querySelectorAll(".p_num").forEach(function (item) {
+	            if(item.parentElement.parentElement.parentElement.previousElementSibling.firstElementChild.firstElementChild.checked == true){
+	                var count = parseInt(item.getAttribute('value'));
+	                this.totalCount += count;
+	                var price = item.parentElement.parentElement.previousElementSibling.firstElementChild.getAttribute('value');
+	                this.totalPrice += count * price;
+	            }
+	        }, this); // forEach 2번째 파라메터로 객체를 넘겨서 this 가 객체리터럴을 가리키도록 함. - thisArg
+	    },
+	    //화면 업데이트
+	    updateUI: function () {
+	        document.querySelector('#sum_p_num').textContent = '상품갯수: ' + this.totalCount.formatNumber() + '개';
+	        document.querySelector('#sum_p_price').textContent = '합계금액: ' + this.totalPrice.formatNumber() + '원';
+	    },
+	    //개별 수량 변경
+	    changePNum: function (pos) {
+	        var item = document.querySelector('input[name=p_num'+pos+']');
+	        var p_num = parseInt(item.getAttribute('value'));
+	        var newval = event.target.classList.contains('up') ? p_num+1 : event.target.classList.contains('down') ? p_num-1 : event.target.value;
+	        
+	        if (parseInt(newval) < 1 || parseInt(newval) > 99) { return false; }
 
+	        item.setAttribute('value', newval);
+	        item.value = newval;
+
+	        var price = item.parentElement.parentElement.previousElementSibling.firstElementChild.getAttribute('value');
+	        item.parentElement.parentElement.nextElementSibling.textContent = (newval * price).formatNumber()+"원";
+	        //AJAX 업데이트 전송
+
+	        //전송 처리 결과가 성공이면    
+	        this.reCalc();
+	        this.updateUI();
+	    },
+	    checkItem: function () {
+	        this.reCalc();
+	        this.updateUI();
+	    },
+	    delItem: function () {
+	        event.target.parentElement.parentElement.parentElement.remove();
+	        this.reCalc();
+	        this.updateUI();
+	    }
+	}
+</script>
 	</body>
 </html>
