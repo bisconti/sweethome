@@ -26,7 +26,8 @@
                   <a href="#">커뮤니티</a>
                   <a href="#">문의내역</a>
                   <a href="#">마이페이지</a>
-                  <a href="#">나의장바구니</a>
+                  <a href="${cp}/user/basket">나의장바구니</a>
+                  <a href="${cp}/user/order">주문내역</a>
                </div>
             </div>
             <div id="logout">
@@ -39,51 +40,61 @@
 					<section id="main" class="wrapper">
 						<div class="inner">
 							<h1 class="major">장바구니</h1>
-							<form action="" name="orderform" id="orderform" method="post" class="orderform" onsubmit="noBack();">
-							<div class="row head" style="color: black;">
-								<div class="subdiv">
-									<div class="check">선택</div>
-									<div class="img">이미지</div>
-									<div class="pname">상품명 및 설명</div>
-									<div class="num">수량</div>
-									<div class="basketcmd">삭제</div>
-								</div>
-							</div>
-							<c:forEach begin="0" end="${product.size()-1}" var="i" step="1">
-							<c:if test="${product.get(i) != null}">
-								<div class="basketdiv" id="basket">
-									<div id="myproduct1">
-										<div id="check">
-											<label class="checkbox">
-												<input type="checkbox" name="buy" onclick="basket.checkItem();">
-												<span class="checkmark"></span>
-											</label>
-										</div>
-										<div id="product_img">
-											<img src="${cp}/resources/product/${product.get(i).productphoto}" alt="" id="product_img1">
-										</div>
-										<div id="product_name">
-										<div id="product_name_contents">
-											<h3 style="text-align: center;">${product.get(i).productname}</h3>
-											<h5 style="text-align: center;">${product.get(i).productcontents}</h5>
-										</div>
-										</div>
-										<div id="product_amount">
-											<p>수량: 1</p>
-											<input type="button" value="삭제" id="delete" onclick="basket.delItem();">
+							<c:choose>
+								<c:when test="${product.size() > 0 }">
+									<form action="${cp}/user/doorder" name="orderform" id="orderform" method="post" class="orderform" onsubmit="noBack();">
+									<input type="hidden" value="${user.userid}" name="userid">
+									<div class="row head" style="color: black;">
+										<div class="subdiv">
+											<div class="check">선택</div>
+											<div class="img">이미지</div>
+											<div class="pname">상품명 및 설명</div>
+											<div class="num">수량</div>
+											<div class="basketcmd">삭제</div>
 										</div>
 									</div>
-								</div>
-							</c:if>
-							</c:forEach>
-							<div class="right-align basketrowcmd">
-									<a href="javascript:void(0)" class="abutton" onclick="basket.delCheckedItem();">선택상품삭제</a>
-									<a href="javascript:void(0)" class="abutton" onclick="basket.delAllItem();">장바구니비우기</a>
-								</div>
-							</form>
-							<div id="order">
-								<a href=""><input type="submit" value="주문하기" id="orderbutton"></a>
-							</div>
+									<c:forEach begin="0" end="${product.size()-1}" var="i" step="1">
+									<c:if test="${product.get(i) != null}">
+										<div class="basketdiv" id="basket">
+											<div id="myproduct1">
+												<div id="check">
+													<label class="checkbox">
+														<input type="checkbox" name="buy" onclick="basket.checkItem();">
+														<span class="checkmark"></span>
+													</label>
+												</div>
+												<div id="product_img">
+													<img src="${cp}/resources/product/${product.get(i).productphoto}" alt="" id="product_img1">
+												</div>
+												<div id="product_name">
+												<div id="product_name_contents">
+													<h3 style="text-align: center;">${product.get(i).productname}</h3>
+													<h5 style="text-align: center;">${product.get(i).productcontents}</h5>
+												</div>
+												</div>
+												<div id="product_amount">
+													<p>수량: 1</p>
+													<input type="button" value="삭제" id="delete" onclick="basket.delItem();">
+												</div>
+											</div>
+										</div>
+									</c:if>
+									</c:forEach>
+									<div class="right-align basketrowcmd">
+											<a href="javascript:void(0)" class="abutton" onclick="basket.delCheckedItem();">선택상품삭제</a>
+											<a href="javascript:void(0)" class="abutton" onclick="basket.delAllItem();">장바구니비우기</a>
+										</div>
+									<div id="order">
+										<input type="submit" value="주문하기" id="orderbutton">
+									</div>
+									</form>
+								</c:when>
+								<c:otherwise>
+									<div id="nobasket">
+										<h2>장바구니에 담긴 물품이 없습니다.</h2>
+									</div>
+								</c:otherwise>
+							</c:choose>
 						</div>
 				</section>
 			</div>

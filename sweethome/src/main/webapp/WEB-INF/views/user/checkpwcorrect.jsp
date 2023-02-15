@@ -29,7 +29,7 @@
         }
 
         label {
-            color: black;
+            color: black !important;
         }
 
         input[type="text"],
@@ -49,35 +49,31 @@
         <title>Untitled</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="assets/css/main.css" />
-        <noscript>
-            <link rel="stylesheet" href="assets/css/noscript.css" />
-        </noscript>
+        <link rel="stylesheet" href="${cp}/resources/assets/css/main.css" />
+       <link rel="stylesheet" href="${cp}/resources/assets/css/noscript.css" />
     </head>
 
-    <body class="is-preload">
-
-        <!-- Header -->
-        <header id="header">
-            <div id="logobox"><a href="index.html" class="title" id="logo_"><img src="./images/sweethome.png" alt="사진"
-                        id="logo"></a></div>
-            <div id="mypage">
-                <a href=""><img src="./images/basicprofile.jpg" alt="" id="myprofile"></a>
-                <h5 id="welcome">환영합니다! <br>유저님</h5>
-            </div>
-            <div class="dropdown">
-                <div class="dropbtn">MENU</div>
-                <div class="dropdown-content">
-                    <a href="">커뮤니티</a>
-                    <a href="/contactus/email_index">문의내역</a>
-                    <a href="/map/map_index">마이페이지</a>
-                    <a href="/map/map_index">나의 장바구니</a>
-                </div>
+    <header id="header">
+		<div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
+					id="logo"></a></div>
+		<div id="mypage">
+			<a href=""><img src="${cp}/resources/images/basicprofile.jpg" alt="" id="myprofile"></a>
+			<h5 id="welcome">환영합니다! <br>${user.username}님</h5>
+		</div>
+		<div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
+			<div class="dropbtn" id="help">MENU</div>
+               <div class="dropdown-content">
+                  <a href="#">커뮤니티</a>
+                  <a href="#">문의내역</a>
+                  <a href="#">마이페이지</a>
+                  <a href="${cp}/user/basket">나의장바구니</a>
+                  <a href="${cp}/user/order">주문내역</a>
+               </div>
             </div>
             <div id="logout">
-                <a href=""><input type="button" value="로그아웃"></a>
-            </div>
-        </header>
+				<a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
+			</div>
+	</header>
 
         <!-- Wrapper -->
         <div id="wrapper">
@@ -89,23 +85,21 @@
             </section>
         </div>
         <div id="all">
-            <form action="${cp}/user/updatepw.us" name="joinForm" method="post" onsubmit="return pwcheck();">
+            <form action="${cp}/user/updatepw" name="joinForm" method="post" onsubmit="return pwcheck();">
                 <br><br><br>
-                <form action="${cp}/user/updatepw.us" name="joinForm" method="post" onsubmit="return pwcheck();">
                     <input type="hidden" name="userid" id="userid" value="${userid}">
                     <div class="idsearchbox">
                         <label for="userpw">변경할 비밀번호</label>
-                        <input type="password" name="userpw" id="userpw" placeholder="비밀번호를 입력해주세요" />
+                        <input type="password" name="userpw" id="userpw" placeholder="비밀번호를 입력해주세요" style="border:  2px solid #3cb371 !important;"/>
                     </div>
                     <div class="idsearchbox">
                         <label for="userpw_re">비밀번호 확인</label></th>
-                        <input type="password" name="userpw_re" id="userpw_re" placeholder="비밀번호 확인" />
+                        <input type="password" name="userpw_re" id="userpw_re" placeholder="비밀번호 확인" style="border:  2px solid #3cb371 !important;" />
                     </div>
                     <div class="idsearchbox pwsubmit">
                         <input type="submit" value="변경하기" id="submit">
                     </div>
                     <br>
-                </form>
             </form>
         </div>
 
@@ -114,16 +108,16 @@
             <div class="inner">
                 <div id="external_link">
                     <div id="twitter">
-                        <a href="https://twitter.com"><img src="./images/트위터.png" alt="" id="twitter_pic"></a>
+                        <a href="https://twitter.com"><img src="${cp}/resources/images/트위터.png" alt="" id="twitter_pic"></a>
                     </div>
                     <div id="facebook">
-                        <a href="https://facebook.com"><img src="./images/페이스북.png" alt="" id="facebook_pic"></a>
+                        <a href="https://facebook.com"><img src="${cp}/resources/images/페이스북.png" alt="" id="facebook_pic"></a>
                     </div>
                     <div id="instagram">
-                        <a href="https://instagram.com"><img src="./images/인스타그램.png" alt="" id="instagram_pic"></a>
+                        <a href="https://instagram.com"><img src="${cp}/resources/images/인스타그램.png" alt="" id="instagram_pic"></a>
                     </div>
                     <div id="youtube">
-                        <a href="https://youtube.com"><img src="./images/유튜브.png" alt="" id="youtube_pic"></a>
+                        <a href="https://youtube.com"><img src="${cp}/resources/images/유튜브.png" alt="" id="youtube_pic"></a>
                     </div>
                 </div>
                 <ul class="menu">
@@ -138,13 +132,13 @@
 
 
         <!-- Scripts -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/jquery.scrollex.min.js"></script>
-        <script src="assets/js/jquery.scrolly.min.js"></script>
-        <script src="assets/js/browser.min.js"></script>
-        <script src="assets/js/breakpoints.min.js"></script>
-        <script src="assets/js/util.js"></script>
-        <script src="assets/js/main.js"></script>
+          <script src="${cp}/resources/assets/js/jquery.min.js"></script>
+       <script src="${cp}/resources/assets/js/jquery.scrollex.min.js"></script>
+       <script src="${cp}/resources/assets/js/jquery.scrolly.min.js"></script>
+          <script src="${cp}/resources/assets/js/browser.min.js"></script>
+       <script src="${cp}/resources/assets/js/breakpoints.min.js"></script>
+       <script src="${cp}/resources/assets/js/util.js"></script>
+       <script src="${cp}/resources/assets/js/main.js"></script>
 
     </body>
     <script>
@@ -187,5 +181,4 @@
             return true;
         }
     </script>
-
     </html>

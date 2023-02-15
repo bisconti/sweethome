@@ -24,9 +24,16 @@ function sendit(){
        userid.focus();
        return false;
     }
-    
+    const correntpw = joinForm.correnpw;
     const userpw = joinForm.userpw;
     const userpw_re = joinForm.userpw_re;
+    
+    if(correntpw.value == ""){
+       alert("현재 비밀번호를 입력해주세요 !");
+       correntpw.focus();
+       return false;
+    }
+    
     if(userpw.value == ""){
         alert("비밀번호를 입력하세요!");
         userpw.focus();
@@ -139,7 +146,7 @@ function checkId(){
       }
    }
    
-   xhr.open("GET",cp+"/user/checkidok.us?userid="+userid.value,true);
+   xhr.open("GET",cp+"/user/overlapidok?userid="+userid.value,true);
    xhr.send();
 }
 function sample6_execDaumPostcode() {
@@ -279,7 +286,6 @@ birthDayEl.addEventListener('focus', function(){
         }
         obj.value = phone;
     }
-
 
 
 

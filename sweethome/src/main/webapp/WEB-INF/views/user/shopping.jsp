@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set value="${loginUser}" var="loginUser" scope="session"/>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -25,7 +26,8 @@
                   <a href="#">커뮤니티</a>
                   <a href="#">문의내역</a>
                   <a href="#">마이페이지</a>
-                  <a href="#">나의장바구니</a>
+                  <a href="${cp}/user/basket">나의장바구니</a>
+                  <a href="${cp}/user/order">주문내역</a>
                </div>
             </div>
             <div id="logout">

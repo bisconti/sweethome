@@ -7,30 +7,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="${cp}/resources/assets/css/main.css" />
     <title>Document</title>
 </head>
 <body>
     <!-- Header -->
 	<header id="header">
-		<div id="logobox"><a href="index.html" class="title" id="logo_"><img src="./images/sweethome.png" alt="사진"
+		<div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
 					id="logo"></a></div>
 		<div id="mypage">
-			<a href=""><img src="./images/basicprofile.jpg" alt="" id="myprofile"></a>
-			<h5 id="welcome">환영합니다! <br>유저님</h5>
+			<a href=""><img src="${cp}/resources/images/basicprofile.jpg" alt="" id="myprofile"></a>
+			<h5 id="welcome">환영합니다! <br>${user.username}님</h5>
 		</div>
-		<div class="dropdown">
-			<div class="dropbtn">MENU</div>
-			<div class="dropdown-content">
-				<a href="">커뮤니티</a>
-				<a href="/contactus/email_index">문의내역</a>
-				<a href="/map/map_index">마이페이지</a>
-				<a href="/map/map_index">나의 장바구니</a>
+		<div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
+			<div class="dropbtn" id="help">MENU</div>
+               <div class="dropdown-content">
+                  <a href="#">커뮤니티</a>
+                  <a href="#">문의내역</a>
+                  <a href="#">마이페이지</a>
+                  <a href="${cp}/user/basket">나의장바구니</a>
+                  <a href="${cp}/user/order">주문내역</a>
+               </div>
+            </div>
+            <div id="logout">
+				<a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
 			</div>
-		</div>
-		<div id="logout">
-			<a href=""><input type="button" value="로그아웃"></a>
-		</div>
 	</header>
     <div id="wrapper">
         <!-- Main -->

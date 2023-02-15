@@ -104,6 +104,7 @@ input, select, textarea {
 #product_line1,#product_line2,#product_line3,#product_line4{
 	width: 100%;
 	margin-bottom: 100px;
+	border-bottom: 2px dotted mediumseagreen;
 }
 #product1{
 	width: 33%;
@@ -161,6 +162,7 @@ input, select, textarea {
 	text-align: center;
 	font-size: 100%;
 	font-weight: bold;
+	margin-bottom: 50px;
 }
 #go_box{
 	margin-top: 50px;
@@ -574,8 +576,173 @@ text-decoration: none;
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+#nobasket{
+	text-align: center;
+	margin-bottom: 102px;
+}
 /* basket end */
 
+/* order start */
+.subdiv_{
+  display: flex;
+  font-weight: bold;
+}
+.ordernum_{
+  margin-left: 70px;
+}
+.img_{
+  margin-left: 100px;
+}
+.pname_{
+  margin-left: 185px;
+}
+.amount_{
+  margin-left: 310px;
+}
+.condition_{
+  margin-left: 112px;
+}
+.date_{
+  margin-left: 185px;
+}
+
+#check_{
+  width: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-top: 2px dotted mediumseagreen;
+}
+.checkbox_ {
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox_ input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark_ {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border: 1px solid black;
+}
+
+.checkbox_:hover input ~ .checkmark_ {
+  background-color: #ccc;
+}
+
+.checkbox_ input:checked ~ .checkmark_ {
+  background-color: mediumseagreen;
+}
+
+.checkmark_:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox_ input:checked ~ .checkmark_:after {
+  display: block;
+}
+
+.checkbox_ .checkmark_:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#orderproductline{
+  width: 100%;
+  display: flex;
+}
+#orderbasket{
+  color: black;
+  display: flex;
+  border-bottom: 2px dotted mediumseagreen;
+  border-left: 2px dotted mediumseagreen;
+  border-right: 2px dotted mediumseagreen;
+}
+#ordernum{
+  display: flex;
+  width: 15%;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px dotted mediumseagreen;
+  border-top: 2px dotted mediumseagreen;
+}
+#orderproductphotos{
+  display: flex;
+}
+#orderproductphoto{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  border-right: 2px dotted mediumseagreen;
+  border-top: 2px dotted mediumseagreen;
+}
+#realorderphoto{
+  width: 100%;
+  background-size: cover;
+}
+#orderproductinfos{
+  width: 100%;
+  border: 1px solid red;
+}
+#orderproductinfo{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px dotted mediumseagreen;
+  border-top: 2px dotted mediumseagreen;
+}
+#orderamount{
+  display: flex;
+  width: 30%;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px dotted mediumseagreen;
+  border-top: 2px dotted mediumseagreen;
+}
+#orderdate{
+  display: flex;
+  width: 10%;
+  align-items: center;
+  justify-content: center;
+  border-top: 2px dotted mediumseagreen;
+  border-right: 2px dotted mediumseagreen;
+}
+#ordercondition{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  border-top: 2px dotted mediumseagreen;
+}
+/* order end */
 /* mypage start */
 #myprofilefield,
 #myinfofield,
@@ -926,7 +1093,337 @@ form input::file-selector-button {
 /* index end */
 /* 준민 끝 */
 
+/* 정호 시작*/
+/* donate start */
+#donate_table {
+   width: 70%;
+   margin: 0 auto;
+   text-align: center !important;
+}
+
+#donate_title>th {
+   height: 40px !important;
+   border: 1px solid rgba(0, 0, 0, 0.395) !important;
+   color: rgba(255, 255, 255, 0.954) !important;
+   padding: 2px !important;
+   text-align: center !important;
+   font-size: 140% !important;
+}
+
+#donate_title,
+#donate_list {
+   border-bottom: 0px !important;
+   border-top: 0px !important;
+}
+
+#donate_list>td {
+   border-right: 0px solid #000 !important;
+   border-left: 0px solid #000 !important;
+   color: black !important;
+   font-weight: bold !important;
+}
+
+#donate_line {
+   border: 1px solid mediumseagreen !important;
+   margin: 0 auto !important;
+   width: 69.8%;
+}
+
+#content1 {
+   border-left: 1px solid mediumseagreen !important;
+   border-right: 1px solid mediumseagreen !important;
+}
+
+input::placeholder {
+   color: gray !important;
+}
+#donate_action {
+   width: 70% !important;
+   margin: 0 auto;
+   text-align: right !important;
+}
+
+
+.donate_action {
+   padding: 0% 5% !important;
+   height: auto !important;
+   font-size: 18px !important;
+   background-color: mediumseagreen !important;
+}
+
+.mb-3>label,
+input[type="text"] {
+   color: black !important;
+}
+
+.mb-3>input[type="text"] {
+   border: 1px solid #000 !important;
+   width: 30% !important;
+   float: left !important;
+}
+
+.model-content {
+   border-color: floralwhite !important;
+}
+
+.mb-3 {
+   clear: both !important;
+}
+
+.span {
+   color: black !important;
+   font-size: 140% !important;
+   margin-left: 1% !important;
+}
+
+.j_button {
+   background-color: mediumseagreen !important;
+   padding: 0% 2% 2% 2% !important;
+   border-radius: 10% !important;
+   font-size: 80% !important;
+   font-weight: bold !important;
+}
+
+.donate_search {
+   width: 70% !important;
+   margin: 3% 10% 2% 15% !important;
+   text-align: right !important;
+}
+.content_black{
+   color: black !important;
+}
+/* home */
+   #time_color_black{
+      color: red !important;
+      width: 5% !important;
+   }
+   #label_color_black{
+      color:black !important;
+   }
+/*manager*/
+#alll{
+   margin: 0 auto;
+   height: auto !important;
+   margin-bottom: 200px !important;
+}
+.first_line{
+   width: 40%;
+   height: 150px;
+   clear: both;
+   float: left;
+   padding:  5% 5% 0% 5%;
+   margin-left: 7%;
+   margin-right: 4%;
+   font-size: 170%;
+
+}
+.second_line{
+   width: 40%;
+   height: 150px;
+   margin: 0px;
+   float: left;
+   padding:  5% 5% 0% 5%;
+   font-size: 170%;
+
+
+}
+#name_bar{
+   margin: 0 0;
+   color: black;
+   font-weight: bold;
+}
+#hr_line{
+   border: 1px solid mediumseagreen !important;
+   margin:  0 !important;
+}
+/* counsel */
+
+#head>td {
+   font-weight: bold !important;
+   color: floralwhite !important;
+}
+
+#counsel_list>td {
+   color: rgb(76, 75, 75) !important;
+   border-bottom: 1px solid mediumseagreen !important;
+}
+
+#table {
+   margin: 0 auto;
+   width: 80%;
+   text-align: center;
+}
+
+#counsel_title {
+   text-decoration: none !important;
+}
+
+#counsel_title:hover {
+   color: black;
+}
+
+
+.changepage {
+   color: mediumseagreen;
+}
+
+.page-item1 {
+   display: inline-block;
+   font-size: 110%;
+   border: 1px solid rgba(128, 128, 128, 0.386);
+   padding: 0.2% 1% 0.2% 1% !important;
+   list-style: none;
+   border-radius: 50% !important;
+}
+
+.page1 {
+   width: 100%;
+   height: 100px;
+   margin-top: 2% !important;
+
+}
+
+.pagination1 {
+   height: 100px;
+   padding: 0 !important;
+   text-align: center !important;
+}
+
+#previous {
+   border-radius: 50%;
+}
+
+#next {
+   border-radius: 50%;
+}
+
+.changepage:hover {
+   color: rgb(37, 156, 152);
+}
+
+.page-item1:hover {
+   background-color: rgba(128, 128, 128, 0.136);
+}
+
+
+.search {
+   width: 80% !important;
+   margin: 3% 10% 0% 10% !important;
+   text-align: right !important;
+}
+
+.donate_name {
+   border: 1px solid mediumseagreen;
+   border-radius: 20px;
+   padding: 1% 0% 1% 2%;
+   color: black !important;
+   background-color: floralwhite;
+}
+
+input::placeholder {
+   color: gray !important;
+   text-align: center !important;
+}
+
+table tbody tr:nth-child(1) {
+   background-color: mediumseagreen;
+}
+/* donate end*/
+/* 정호 끝*/
+
 /* 이하늘 시작 */
+
+/* board 시작*/
+
+         #banner{
+         text-align: center;
+         color : black;
+         width: 70%;
+         margin: 0 auto;
+         height: 100%;
+      }
+      .primarysky{
+         color: white;
+         background-color: mediumseagreen;
+         font-size: 20px;
+         text-align:center;
+         width: 7%;
+         position: absolute;
+         top: 250px ;
+         right: 350px;
+      }
+      .board{
+      text-align: left;
+      }
+      #boardtable{
+         width: 100%;
+         margin: 0 auto;
+      }
+      #sky{
+         /* border: solid 1px red; */
+         color: black;
+         text-align: center;
+         border-bottom: solid 2px mediumseagreen;
+      }
+      #skytr{
+         border-bottom: solid 2px mediumseagreen;
+      }
+      #searchsky{
+         margin-top: 20px;
+         height: 50px;
+      }
+      #selectsky{
+         text-align: center;
+         width: 20%;
+         float: left;
+         margin-left: 160px;
+      }
+      #keyword{
+         text-align: center;
+         border: solid 2px mediumseagreen;
+         width: 35%;
+         float: left;
+      }
+      .correctionsky{
+         color : mediumseagreenl !important ;
+      }
+      .skysearch{
+         text-align: center;
+         width: 20%;
+         padding-top: 10px;
+         float: left;
+         height: 50px;
+      }
+      .pagesky{
+      text-align:center;
+      width: 100%;
+      }
+.inputsky{
+   border-bottom: solid 1px mediumseagreen;
+}
+#skyprimary{
+   background-color: mediumseagreen;
+}
+.skyprimary{
+   color:  mediumseagreen;
+}
+#titlediv {
+   border: solid 1px mediumseagreen;
+}
+#contentdiv{
+   border: solid 1px mediumseagreen;
+}
+#registrationsky{
+   background-color: mediumseagreen;
+   font-size: 15px;
+}
+.col-12{
+   margin-top: 10px;
+}
+.correctionsky{
+   background-color: mediumseagreen;
+}
+
 /* join */
 .login-form-field {
    width: 100%;
@@ -1041,6 +1538,9 @@ input[type="date"]{
     background-color: floralwhite;
     border: none;
     outline: none;
+}
+.boardmain{
+   margin-top : 70px;
 }
 #birth{
     border: solid 1px mediumseagreen;
@@ -4472,7 +4972,7 @@ textarea {
 		}
 
 		.wrapper.style2 {
-			background-color: #3aa4ca;
+			background-color: floralwhite;
 		}
 
 		.wrapper.style2-alt {
