@@ -26,34 +26,38 @@
          alert("게시글 수정 실패!")
       </script>
    </c:if>
-<!-- Header -->
-   <header id="header" class="alt">
-      <a class="logo" href="${cp}/">Spring <span>Board</span></a>
-      <nav id="nav">
-         <ul>
-            <c:choose>
-               <c:when test="${user == null}">
-                  <li class="current"><a href="${cp}/">Home</a></li>
-                  <li><a href="${cp}/user/join">Join</a></li>
-                  <li><a href="${cp}/user/login">Login</a></li>
-               </c:when>
-               <c:otherwise>
-                  <li>${user.username}님 환영합니다!</li>
-                  <li class="current"><a href="${cp}/">Home</a></li>
-                  <li><a href="${cp}/board/list">Board</a></li>
-                  <li><a href="${cp}/user/logout">Logout</a></li>
-               </c:otherwise>
-            </c:choose>
-               
-               
-         </ul>
-      </nav>
+   <!-- Header -->
+    <header id="header">
+      <div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
+               id="logo"></a></div>
+      <c:if test="${user.userid != null}">
+	      <div id="mypage">
+	         <a href=""><img src="${cp}/resources/images/${userphoto}" alt="" id="myprofile"></a>
+	         <h5 id="welcome">환영합니다! <br>${user.username}님</h5>
+	      </div>
+	      <div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
+	         <div class="dropbtn" id="help">MENU</div>
+	               <div class="dropdown-content">
+	                  <a href="#">커뮤니티</a>
+	                  <a href="#">문의내역</a>
+	                  <a href="${cp}/user/mypage">마이페이지</a>
+	                  <a href="${cp}/user/basket">나의장바구니</a>
+	                  <a href="${cp}/user/order">주문내역</a>
+	                 <c:if test="${user.userid.equals('manager')}">
+                  		<a href="${cp}/reserv/counsel?date=${today}">관리페이지</a>
+                  	  </c:if>
+	               </div>
+	            </div>
+	         <div id="logout">
+	            <a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
+	         </div>
+      </c:if>         
    </header>
 <!-- Banner -->
    <div id="banner">
       <div class="wrapper style1 special">
          <div class="board" style="height: 1700px;">
-            <h1 class="heading alt" style="color:mediumseagreen;">커뮤니티</h1>
+            <h1 class="heading alt" style="color:mediumseagreen; margin-top: 200px;">커뮤니티</h1>
             <a href="${cp}/board/list${cri.listLink}" style="float:right; color: mediumseagreen;">목록 보기</a>
             <div class="boardmain">
                <form name="boardForm" method="post" action="${cp}/board/remove">
@@ -62,33 +66,31 @@
                   <input name="amount" value="${cri.amount}" type="hidden">
                   <input name="type" value="${cri.type}" type="hidden">
                   <input name="keyword" value="${cri.keyword}" type="hidden">
-                  <div class="inputsky">
-                     <h4>제목</h4>
-                     <input name="boardtitle" type="text" value="${board.boardtitle}" readonly>
+                  
+                  <div class="inputsky" >
+                     <input name="boardtitle" type="text" value="${board.boardtitle}" readonly style="font-size:30px">
+                     <input name="userid" type="text" value="${board.userid}" readonly style="width:10%; float:left;">
+                     <input name="regdate" type="text" value="${board.regdate}" readonly style="width:20%">
                   </div>
-                  <div class="inputsky" style="margin-top:10px;">
-                     <h4>내용</h4>
+                  <div class="" style="margin-top:10px; font-size: 20px">
                      <textarea name="boardcontents" rows="10" readonly>${board.boardcontents}</textarea>
-                  </div>
-                  <div style="margin-top:10px;">
-                     <h4>작성자</h4>
-                     <input name="userid" type="text" value="${board.userid}" readonly>
                   </div>
                   <c:if test="${user.userid == board.userid }">
                      <div style="text-align: right;">
                         <input type="button" value="수정" class="" onclick="modify()" style="background-color: mediumseagreen">
-                        <input type="submit" value="삭제" class="">
+                        <input type="submit" value="삭제" class="" style="background-color: mediumseagreen">
                      </div>
                   </c:if>
                </form>
+                <div>
+                <div style="border-bottom: solid 1px mediumseagreen; padding:10px; margin-bottom:20px; border-top: solid 1px mediumseagreen;">
                <h3>댓 글</h3>
-               <p style="text-align: right;">
-               <a href="#" class="button primary small regist" style="background-color: mediumseagreen">댓글 등록</a>
-               </p>
-               <div class="replyForm row" style="width:100%; margin-left: 10px">
+               </div>
+               <c:if test="${user.userid != null}">
+               <div class="show row" style="width:100%; margin-left: 10px;">
                   <div style="width:15%; text-align:center;">
                      <h4>작성자</h4>
-                     <input name="userid" style="width:100%; border: none; background-color: floralwhite; color:black; text-align: right ;"  value="${user.userid}" readonly >
+                     <input name="userid" style="width:100%; border: none; background-color: floralwhite; color:black; text-align: right;"  value="${user.userid}" readonly >
                   </div>
                   <div style="width:65%;">
                      <h4>내 용</h4>
@@ -96,22 +98,23 @@
                   </div>
                   <div style="width:20%">
                      <h4>&nbsp;</h4>
-                     <a href="#" class="button primary small finish" style="margin-bottom:1rem; background-color: mediumseagreen;">등록</a>
-                     <a href="#" class="button primary small cancel" style="background-color: mediumseagreen">취소</a>
+                     <a href="#" class="button primary small finish" style="margin-bottom:1rem; background-color: mediumseagreen; width:70%; margin-top:30px;">등록</a>
                   </div>
-               </div>
+                </div>
+                </c:if>
                <!-- 댓글 띄우는 ul -->
                <ul class="alt replies"></ul>
                <!-- 댓글 페이징 처리할 div -->
-               <div class="page">
+               <div class="page" style="width:50%; text-align:center; margin:0 auto;">
                </div>
+              </div>
             </div>
          </div>
       </div>
    </div>
       <!-- Footer -->
    <footer id="footer" class="wrapper alt">
-      <div class="inner">
+      <div class="inner" style="margin: 0 auto;">
          <div id="external_link">
             <div id="twitter">
                <a href="https://twitter.com"><img src="${cp}/resources/images/트위터.png" alt="" id="twitter_pic"></a>
@@ -174,14 +177,13 @@
                let str = "";
                
                str += '<li style="clear:both;" class="li'+result+'">'
-               str += '<div style=" width:80%;    float: left; height:100px; border-bottom: solid 2px mediumseagreen; ">';
-               //<strong class="userid123">apple</strong>
-               str += '<strong class="userid'+result+'">'+loginUser+'</strong>'
-               str += '<p class="reply'+result+'" style="margin:none;" >'+replycontents+'</p>'
-               str += '</div><div style="text-align:right; width:10%;    float: left;">'
-               str += '<strong>방금 전</strong><br>'
-/*                str += '<a href="'+result+'" class="modify">수정</a>'; */
-/*                str += '<a href="'+result+'" class="mfinish" style="display:none;">수정 완료</a>'; */
+               str += '<div style="display:inline; float:left; width:80%; border-bottom:solid 1px mediumseagreen;">';
+               str += '<strong class="userid'+result+'" style="color:black;">'+loginUser+'</strong>'
+               str += '<p class="reply'+result+'">'+replycontents+'</p>'
+               str += '</div><div style="text-align:right;">'
+               str += '<strong style="color:black;">방금 전</strong><br>'
+               str += '<a href="'+result+'" class="modify">수정</a>';
+               str += '<a href="'+result+'" class="mfinish" style="display:none;">수정 완료</a>';
                str += '<a href="'+result+'" class="remove">&nbsp;&nbsp;삭제</a>';
                str += '</div></li>'
                
@@ -207,8 +209,6 @@
    
       
       $("[name='replycontents']").val("");
-      $(".replyForm").hide();
-      $(".regist").show();
    })
    function showList(pagenum){
       //ajax
@@ -218,22 +218,23 @@
             let str = "";
             if(list == null || list.length == 0){
                flag = false;
-               str += '<li style="clear:both; text-align: center;">등록된 댓글이 없습니다</li>'
+               str += '<li style="clear:both; text-align:center;">등록된 댓글이 없습니다</li>'
                replies.html(str);
                return;
             }
+            
             maxCnt = replyCnt;
             for(let i=0;i<list.length;i++){
                str += '<li style="clear:both;" class="li'+list[i].replynum+'">'
-               str += '<div style="display:inline; float:left; width:80%;">';
+               str += '<div style="display:inline; float:left; width:80%; border-bottom:solid 1px mediumseagreen;">';
                //<strong class="userid123">apple</strong>
-               str += '<strong class="userid'+list[i].replynum+'">'+list[i].userid+'</strong>'
+               str += '<strong class="userid'+list[i].replynum+'" style="color:black;">'+list[i].userid+'</strong>'
                str += '<p class="reply'+list[i].replynum+'">'+list[i].replycontents+'</p>'
                str += '</div><div style="text-align:right;">'
-               str += '<strong>'+replyService.displayTime(list[i])+'</strong><br>'
-               if(list[i].userid == user.userid){
-/*                   str += '<a href="'+list[i].replynum+'" class="modify">수정</a>';
-                  str += '<a href="'+list[i].replynum+'" class="mfinish" style="display:none;">수정 완료</a>'; */
+               str += '<strong style="color:black;">'+replyService.displayTime(list[i])+'</strong><br>'
+               if(list[i].userid == loginUser){
+                  str += '<a href="'+list[i].replynum+'" class="modify">수정</a>';
+                  str += '<a href="'+list[i].replynum+'" class="mfinish" style="display:none;">수정 완료</a>';
                   str += '<a href="'+list[i].replynum+'" class="remove">&nbsp;&nbsp;삭제</a>';
                }
                str += '</div></li>'
@@ -288,12 +289,11 @@
             }
          },
          function(err){
-            alert("에러발생");
          }
       );
    }
    let replyFlag = false;
-/*    function modifyReply(e){
+   function modifyReply(e){
       e.preventDefault();
       if(!replyFlag){
          replyFlag = true;
@@ -306,8 +306,8 @@
       else{
          alert("수정중인 댓글이 있습니다!");
       }
-   } */
-/*    function modifyReplyOk(e){
+   }
+   function modifyReplyOk(e){
       e.preventDefault();
       replyFlag = false;
       
@@ -328,7 +328,7 @@
             }
          }
       )
-   } */
+   }
 
    function modify(){
       const boardForm = document.boardForm;
@@ -337,21 +337,11 @@
       boardForm.setAttribute("method","get");
       boardForm.submit()
    }
-   $(".regist").on("click",function(e){
-      e.preventDefault();
-      $(".replyForm").show();
-      $(this).hide();
-   })
-   $(".cancel").on("click",function(e){
-      e.preventDefault();
-      $(".replyForm").hide();
-      $(".regist").show();
-      $("[name='replycontents']").val("")
-   })
    
    
 </script>
 </html>
+
 
 
 

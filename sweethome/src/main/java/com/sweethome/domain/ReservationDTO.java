@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class ReservationDTO {
    private int reservnum;
-   private String username;
-   private String resvdate;
-   private String resvtime;
+   private String userid;
+   private String reservdate;
+   private String reservtime;
    private String resvcontents;
 }

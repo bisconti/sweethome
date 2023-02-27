@@ -11,30 +11,47 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <link rel="stylesheet" href="${cp}/resources/assets/css/main.css" />
+<style>
+</style>
 </head>
 <body class="skybody">
+   <c:if test="${not empty s}">
+      <script>
+         alert("게시글 등록 성공!")
+      </script>
+   </c:if>
+      <c:if test="${not empty f}">
+      <script>
+         alert("게시글 삭제 성공!")
+      </script>
+   </c:if>
    <!-- Header -->
-   <header id="header">
-		<div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
-					id="logo"></a></div>
-		<div id="mypage">
-			<a href=""><img src="${cp}/resources/images/basicprofile.jpg" alt="" id="myprofile"></a>
-			<h5 id="welcome">환영합니다! <br>${user.username}님</h5>
-		</div>
-		<div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
-			<div class="dropbtn" id="help">MENU</div>
-               <div class="dropdown-content">
-                  <a href="#">커뮤니티</a>
-                  <a href="#">문의내역</a>
-                  <a href="#">마이페이지</a>
-                  <a href="${cp}/user/basket">나의장바구니</a>
-                  <a href="${cp}/user/order">주문내역</a>
-               </div>
-            </div>
-            <div id="logout">
-				<a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
-			</div>
-	</header>
+    <header id="header">
+      <div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
+               id="logo"></a></div>
+      <c:if test="${user.userid != null}">
+	      <div id="mypage">
+	         <a href=""><img src="${cp}/resources/images/${userphoto}" alt="" id="myprofile"></a>
+	         <h5 id="welcome">환영합니다! <br>${user.username}님</h5>
+	      </div>
+	      <div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
+	         <div class="dropbtn" id="help">MENU</div>
+	               <div class="dropdown-content">
+	                  <a href="#">커뮤니티</a>
+	                  <a href="#">문의내역</a>
+	                  <a href="${cp}/user/mypage">마이페이지</a>
+	                  <a href="${cp}/user/basket">나의장바구니</a>
+	                  <a href="${cp}/user/order">주문내역</a>
+	                  <c:if test="${user.userid.equals('manager')}">
+                  		<a href="${cp}/reserv/counsel?date=${today}">관리페이지</a>
+                  	  </c:if>
+	               </div>
+	            </div>
+	         <div id="logout">
+	            <a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
+	         </div>
+      </c:if>         
+   </header>
    <!-- Banner -->
    <div id="banner">
       <div class="boardmain">
@@ -59,10 +76,7 @@
                               <td id="sky">${board.boardnum}</td>
                               <td id="sky"><a href="${board.boardnum}" class="get">${board.boardtitle }</a></td>
                               <td id="sky">${board.userid }</td>
-                              <td class="" id="sky">${board.regdate}
-                                 <c:if test="${board.regdate != board.updatedate }">
-                                 </c:if>
-                              </td>
+                              <td class="" id="sky">${board.regdate}</td>
                            </tr>
                         </c:forEach>
                      </c:if>
@@ -77,7 +91,7 @@
             <form id="searchForm" action="${cp}/board/list" >
                <div  style="height:20px;">
                   <select name="type" id="selectsky"  >
-                     <option value="" ${pageMaker.cri.type == null ? "selected" : ""}>검색</option>
+                     <option value="" ${pageMaker.cri.type == null ? "selected" : ""}>검색 기준</option>
                      <option value="T" ${pageMaker.cri.type == "T" ? "selected" : ""}>제목</option>
                      <option value="C" ${pageMaker.cri.type == "C" ? "selected" : ""}>내용</option>
                      <option value="W" ${pageMaker.cri.type == "W" ? "selected" : ""}>작성자</option>
@@ -86,7 +100,7 @@
                      <option value="TCW" ${pageMaker.cri.type == "TCW" ? "selected" : ""}>제목 또는 내용 또는 작성자</option>
                   </select>
                   <input type="text" name="keyword" id="keyword" value="${pageMaker.cri.keyword }">
-                  <a href="#" class="skysearch">검색</a>
+                <a href="#" class="skysearch">검색</a>
                </div>
                <input type="hidden" value="1" name="pagenum">
                <input type="hidden" value="10" name="amount">
@@ -120,7 +134,7 @@
    
       <!-- Footer -->
    <footer id="footer" class="wrapper alt">
-      <div class="inner">
+      <div class="inner" style="margin: 0 auto;">
          <div id="external_link">
             <div id="twitter">
                <a href="https://twitter.com"><img src="${cp}/resources/images/트위터.png" alt="" id="twitter_pic"></a>
@@ -189,7 +203,6 @@
    }
 </script>
 </html>
-
 
 
 

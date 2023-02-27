@@ -12,35 +12,57 @@
    
 </head>
 <style>
+   input{
+        color: black !important;
+    }
    #certificationNum{
    position: absolute;
    right: 2%;
    top: 4%;
 }
+   input[type="submit"]{
+   font-size: 0.64em;
+   }
+   #userNum{
+   float: none;
+   }
+   #userpw_re, #username{
+   height: 2.75em;
+   }
 </style>
 <body class="is-preload">
+<c:if test="${not empty z}">
+      <script>
+         alert("프로필 사진이 성공적으로 바뀌었습니다!")
+      </script>
+   </c:if>
+   <c:if test="${not empty c}">
+      <script>
+         alert("프로필 사진 변경에 실패하였습니다. 다시 시도해주세요!")
+      </script>
+   </c:if>
    <!-- Header -->
    <header id="header">
-		<div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
-					id="logo"></a></div>
-		<div id="mypage">
-			<a href=""><img src="${cp}/resources/images/basicprofile.jpg" alt="" id="myprofile"></a>
-			<h5 id="welcome">환영합니다! <br>${user.username}님</h5>
-		</div>
-		<div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
-			<div class="dropbtn" id="help">MENU</div>
+      <div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
+               id="logo"></a></div>
+      <div id="mypage">
+         <a href=""><img src="${cp}/resources/images/${userphoto}" alt="" id="myprofile"></a>
+         <h5 id="welcome">환영합니다! <br>${user.username}님</h5>
+      </div>
+      <div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
+         <div class="dropbtn" id="help">MENU</div>
                <div class="dropdown-content">
                   <a href="#">커뮤니티</a>
                   <a href="#">문의내역</a>
-                  <a href="#">마이페이지</a>
+                  <a href="${cp}/user/mypage">마이페이지</a>
                   <a href="${cp}/user/basket">나의장바구니</a>
                   <a href="${cp}/user/order">주문내역</a>
                </div>
             </div>
             <div id="logout">
-				<a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
-			</div>
-	</header>
+            <a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
+         </div>
+   </header>
    <!-- Wrapper -->
    <div id="wrapper">
       <!-- Main -->
@@ -48,25 +70,27 @@
          <div class="inner">
             <h1 class="major">마이페이지</h1>
             <div id="left_area">
-               <form action="" id="mypageform">
-                  <fieldset id="myprofilefield" style="margin-bottom: 20px;">
+               <form name="photoForm" id="photoForm" action="${cp}/user/adduserphoto" method="post" enctype="multipart/form-data">
+                  <fieldset id="myprofilefield" style="margin-bottom: 20px; height:455px;">
                      <legend style="color: black; font-weight: bold;">PROFILE IMAGE</legend>
                      <table>
                         <tr>
                            <td>
                               <div id="myprofile_img">
-                                 <img alt="" src="${cp}resources/images/basicprofile.jpg" id="userphoto">
+                                 <img alt="" src="${cp}/resources/images/${userphoto}" id="userphoto" style="height:350px;">
                               </div>
                               <div class="filebox">
-                                 <label for="ex_file" id="uploadbutton">업로드</label>
+                                 <label for="ex_file" id="uploadbutton" style="margin-left:-15px;">업로드</label>
                                  <input type="file" id="ex_file" name="userphoto"
                                     accept=".jpg, .png, .jpeg, .gif">
                               </div>
-                              <input type="submit" value="수정하기" id="modify" onclick="sendit()">
+                             <input type="hidden" name="userid" id="userid" value="${user.userid}">
+                              <input type="submit" value="수정하기" id="modify" onclick="sendit()" style="margin-left:-8px; margin-top:-5px;">
                            </td>
                         </tr>
                      </table>
                   </fieldset>
+                   </form>
                   <fieldset id="myinfofield" style="margin-bottom: 800px;">
                      <legend style="color: black; font-weight: bold;">INFO</legend>
                      <table>
@@ -86,11 +110,10 @@
                         <tr>
                      </table>
                   </fieldset>
-               </form>
             </div>
             <div id="right_area">
                <form name="joinForm" action="${cp}/user/updatephone" method="post" onsubmit="return sendphone();">
-               <fieldset id="phonefield" style="margin-bottom: 260px;">
+               <fieldset id="phonefield" style="margin-bottom: 292px;">
                   <input type="hidden" name="userid" value="${user.userid}">
                   <legend style="color: black; font-weight: bold;">PHONE</legend>
                   <table>
@@ -215,6 +238,25 @@
    <script src="${cp}/resources/assets/js/util.js"></script>
    <script src="${cp}/resources/assets/js/main.js"></script>
 </body>
+<script>
+//HTML 문서에서 id가 'ex_file'인 input 요소를 찾습니다.
+const input = document.getElementById('ex_file');
+
+// input 요소의 값이 변경되면 change 이벤트가 발생합니다.
+input.addEventListener('change', () => {
+  const file = input.files[0];
+  if (file) {
+    // FileReader 객체를 생성합니다.
+    const reader = new FileReader();
+    reader.onload = () => {
+      // id가 'userphoto'인 img 요소의 src 속성을 변경합니다.
+      const img = document.getElementById('userphoto');
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+</script>
    <script>
    var code2 = "";
    $('#certificationNum').click(function() {

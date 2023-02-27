@@ -15,8 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sweethome.domain.Criteria;
 import com.sweethome.domain.DonateDTO;
+import com.sweethome.domain.KakaoDTO;
 import com.sweethome.domain.OrderDTO;
 import com.sweethome.domain.ProductDTO;
 import com.sweethome.domain.UserDTO;
@@ -38,9 +41,6 @@ public class UserServiceImpl implements UserService {
          return false;
       }
       else {
-         if(req == null) {
-            
-         } else {
          req.getSession().setAttribute("user", user);
          req.getSession().setAttribute("userage", user.getUserbirth());
          req.getSession().setAttribute("userphoto", user.getUserphoto());
@@ -48,7 +48,6 @@ public class UserServiceImpl implements UserService {
          }
          return true;
       }
-   }
 
    @Override
    public void goshopping(HttpServletRequest req) {
@@ -149,7 +148,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean order(String userid, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		userid = (String)session.getAttribute("loginUser");
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		userid = user.getUserid();
+		System.out.println(userid);
 		List<ProductDTO> product = new ArrayList<ProductDTO>();
 		String simplelist = mapper.getorderlistsimple(userid);
 		String[] simple = simplelist.split(",");
@@ -180,7 +181,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean modifyorder(String userid, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		userid = (String)session.getAttribute("loginUser");
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		userid = user.getUserid();
 		mapper.modifyorder(userid);
 		
 		List<ProductDTO> product = new ArrayList<ProductDTO>();
@@ -240,15 +242,16 @@ public class UserServiceImpl implements UserService {
 	   
 
 	   @Override
-	   public boolean checkid(String username, String userphone, HttpServletRequest req) {
-	      String userid = mapper.checkid(username, userphone);
-	      if(userid == null) {
-	         return false;
-	      } else {
-	         req.setAttribute("userid", userid);
-	         return true;
+	      public boolean checkid(String username, String userphone, HttpServletRequest req) {
+	         String userid = mapper.checkid(username, userphone);
+	         if(userid == null) {
+	            return false;
+	         } else {
+	            req.setAttribute("userid", userid);
+	            req.setAttribute("username", username);
+	            return true;
+	         }
 	      }
-	   }
 
 	   @Override
 	   public boolean checkpw(String userid, String userphone, HttpServletRequest req) {
@@ -298,18 +301,15 @@ public class UserServiceImpl implements UserService {
 
 	   @Override
 	   public boolean userIdExist(String userid, HttpServletResponse resp) throws IOException {
-	      if(mapper.userIdExist(userid)) {
-	         return true;
+	      PrintWriter out = resp.getWriter();
+	      if(mapper.userIdExist(userid)==1) {
+	    	  System.out.println("ㅇ??");
+	         out.print("X");
 	      } else {
-	         return false;
+	    	  System.out.println("ㅇㅇ?");
+	         out.print("O");
 	      }
-	         
-//	      PrintWriter out = resp.getWriter();
-//	      if(mapper.userIdExist(userid)) {
-//	         out.print("O");
-//	      } else {
-//	         out.print("X");
-//	      }
+	      return true;
 	   }
 
 	   @Override
@@ -323,9 +323,14 @@ public class UserServiceImpl implements UserService {
 	   }
 
 	   @Override
-	   public boolean checkphone(String userphone) {
-	      
-	      return mapper.checkphone(userphone);
+	   public boolean checkphone(String userphone, HttpServletResponse resp)throws IOException {
+	      PrintWriter out = resp.getWriter();
+	     if(mapper.checkphone(userphone)==1) {
+	    	 out.print("X");
+	     } else {
+	    	 out.print("O");
+	     }
+		return true;
 	   
 	   }
 
@@ -337,4 +342,52 @@ public class UserServiceImpl implements UserService {
 	         return false;
 	      }
 	   }
+
+	@Override
+	public void kJoin(KakaoDTO kuser, HttpServletResponse resp, HttpServletRequest req) throws IOException {
+		PrintWriter out = resp.getWriter();
+		System.out.println("여까진옴 ?");
+		if(mapper.kJoin(kuser)) {
+			System.out.println("오냐 ?");
+			out.print("O");
+		} else {
+			System.out.println("오냐 ???");
+			out.print("X");
+		}
+		
+	}
+
+	@Override
+	public boolean adduserphoto(String userid, String userphoto, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		HttpSession session = req.getSession(); 
+		//String userphoto = (String)req.getParameter("userphoto");
+		System.out.println(userid);
+		String savephoto = (req.getServletContext().getRealPath("/resources/images"));
+		//System.out.println(userphoto);
+	      // 저장될 파일의 크기(5MB)
+	      int size = 1024 * 1024 * 20;
+
+	      // cos 라이브러리 이용
+	      MultipartRequest photo = new MultipartRequest(req, savephoto, size, "UTF-8", new DefaultFileRenamePolicy());
+	      
+	      // input[type=file] 태그의 name값을 써주면 시스템상 이름을 받아올 수 있음
+//	      String systemname1 = photo.getFilesystemName("userphoto");
+	      // input[type=file] 태그의 name값을 써주면 사용자가 업로드할 당시의 이름을 받아올 수 있음
+	      userphoto = photo.getOriginalFileName("userphoto");
+	      System.out.println(userphoto);
+	      resp.setCharacterEncoding("UTF-8");
+	      resp.setContentType("text/html; charset=utf-8");
+	      UserDTO user = new UserDTO();
+	      user.setUserphoto(photo.getFilesystemName("userphoto"));
+	      
+	      if (mapper.addPhoto(userid,userphoto)) {
+	    	 session.removeAttribute("userphoto");
+	    	 String updatephoto = mapper.newProfile(userid);
+	    	 session.setAttribute("userphoto", updatephoto);
+	    	 System.out.println(updatephoto);
+	    	 return true; 
+	} else {
+		return false;
+	}
+}
 }

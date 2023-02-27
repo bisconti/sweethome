@@ -71,7 +71,7 @@ const replyService = (function(){
             }
          },
          error:function(err){
-            alert("에러발생 시발 : "+err)
+            alert("에러발생 : "+err)
          }
       })
    }
@@ -109,7 +109,6 @@ const replyService = (function(){
    //{프로퍼티:값,메소드명:함수(){}}
    return {add:insert,getList:selectAll,remove:drop,modify:update,displayTime:fmtTime}
 })()
-
 
 
 

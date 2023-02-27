@@ -23,7 +23,10 @@
 
     /* 이승규 css수정파일 공용 */
     input::placeholder {
-        color: #000 !important;
+         color: #000 !important;
+   		 text-align: left !important;
+  		 margin-left: 10px !important;
+   		 padding: 20px !important;
     }
 
     input::-webkit-input-placeholder {
@@ -54,27 +57,32 @@
 <body class="is-preload">
 
         <!-- Header -->
-   <header id="header">
-		<div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
-					id="logo"></a></div>
-		<div id="mypage">
-			<a href=""><img src="${cp}/resources/images/basicprofile.jpg" alt="" id="myprofile"></a>
-			<h5 id="welcome">환영합니다! <br>${user.username}님</h5>
-		</div>
-		<div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
-			<div class="dropbtn" id="help">MENU</div>
-               <div class="dropdown-content">
-                  <a href="#">커뮤니티</a>
-                  <a href="#">문의내역</a>
-                  <a href="#">마이페이지</a>
-                  <a href="${cp}/user/basket">나의장바구니</a>
-                  <a href="${cp}/user/order">주문내역</a>
-               </div>
-            </div>
-            <div id="logout">
-				<a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
-			</div>
-	</header>
+    <header id="header">
+      <div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
+               id="logo"></a></div>
+      <c:if test="${user.userid != null}">
+	      <div id="mypage">
+	         <a href=""><img src="${cp}/resources/images/${userphoto}" alt="" id="myprofile"></a>
+	         <h5 id="welcome">환영합니다! <br>${user.username}님</h5>
+	      </div>
+	      <div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
+	         <div class="dropbtn" id="help">MENU</div>
+	               <div class="dropdown-content">
+	                  <a href="#">커뮤니티</a>
+	                  <a href="#">문의내역</a>
+	                  <a href="${cp}/user/mypage">마이페이지</a>
+	                  <a href="${cp}/user/basket">나의장바구니</a>
+	                  <a href="${cp}/user/order">주문내역</a>
+	                  <c:if test="${user.userid.equals('manager')}">
+                  		<a href="${cp}/reserv/counsel?date=${today}">관리페이지</a>
+                  	  </c:if>
+	               </div>
+	            </div>
+	         <div id="logout">
+	            <a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
+	         </div>
+      </c:if>         
+   </header>
 
     <!-- Wrapper -->
     <div id="wrapper">
@@ -89,18 +97,18 @@
         <div class="checkid">
             <div class="idsearchbox">
                 <label for="name">아이디</label>
-                <input type="text" name="userid" id="userid" placeholder="아이디를 입력해주세요" />
+                <input type="text" name="userid" id="userid" placeholder="아이디를 입력해주세요" style="padding: 10px;"/>
             </div>
             <div class="idsearchbox">
                 <label for="userphone">핸드폰번호</label>
                 <input type="text" name="userphone" id="userphone" onkeyup="addHypen(this);" placeholder="핸드폰번호 입력"
                     maxlength="13" />
-                <input type="button" value="인증번호" id="userphone_btn">
+                <input type="button" value="인증번호" id="userphone_btn" style="margin: 0px 0px 0px 5px;">
             </div>
             <div class="idsearchbox">
                 <label for="userphone">인증번호</label>
                 <input type="text" id="userNum" name="check_number" placeholder="인증번호를 입력해주세요">
-                <input type="button" value="인증확인" id="correct_check">
+                <input type="button" value="인증확인" id="correct_check" style="margin: 0px 0px 0px 5px;">
             </div>
             <div class="idsearchbox pwsubmit">
                 <input type="submit" value="확인" id="submit">

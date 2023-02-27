@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <!DOCTYPE HTML>
-    <!--
-   Hyperspace by Pixelarity
-   pixelarity.com | hello@pixelarity.com
-   License: pixelarity.com/license
--->
-    <html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<!DOCTYPE HTML>
+<html>
     <style>
         h2 {
             text-align: center;
@@ -53,27 +49,32 @@
        <link rel="stylesheet" href="${cp}/resources/assets/css/noscript.css" />
     </head>
 
-    <header id="header">
-		<div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
-					id="logo"></a></div>
-		<div id="mypage">
-			<a href=""><img src="${cp}/resources/images/basicprofile.jpg" alt="" id="myprofile"></a>
-			<h5 id="welcome">환영합니다! <br>${user.username}님</h5>
-		</div>
-		<div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
-			<div class="dropbtn" id="help">MENU</div>
-               <div class="dropdown-content">
-                  <a href="#">커뮤니티</a>
-                  <a href="#">문의내역</a>
-                  <a href="#">마이페이지</a>
-                  <a href="${cp}/user/basket">나의장바구니</a>
-                  <a href="${cp}/user/order">주문내역</a>
-               </div>
-            </div>
-            <div id="logout">
-				<a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
-			</div>
-	</header>
+     <header id="header">
+      <div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
+               id="logo"></a></div>
+      <c:if test="${user.userid != null}">
+	      <div id="mypage">
+	         <a href=""><img src="${cp}/resources/images/${userphoto}" alt="" id="myprofile"></a>
+	         <h5 id="welcome">환영합니다! <br>${user.username}님</h5>
+	      </div>
+	      <div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
+	         <div class="dropbtn" id="help">MENU</div>
+	               <div class="dropdown-content">
+	                  <a href="#">커뮤니티</a>
+	                  <a href="#">문의내역</a>
+	                  <a href="${cp}/user/mypage">마이페이지</a>
+	                  <a href="${cp}/user/basket">나의장바구니</a>
+	                  <a href="${cp}/user/order">주문내역</a>
+	               <c:if test="${user.userid.equals('manager')}">
+                  		<a href="${cp}/reserv/counsel?date=${today}">관리페이지</a>
+                  	  </c:if>
+	               </div>
+	            </div>
+	         <div id="logout">
+	            <a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
+	         </div>
+      </c:if>         
+   </header>
 
         <!-- Wrapper -->
         <div id="wrapper">

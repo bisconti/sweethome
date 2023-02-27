@@ -1,5 +1,5 @@
 create table product(
-   productnum int auto_increment primary key,
+   productnum varchar(300) primary key,
    productname varchar(300) not null,
    productamount int,
    productcontents varchar(300),
@@ -22,9 +22,20 @@ create table user(
 
 create table shoppinglist(
    userid varchar(300),
-   productnum int,
+   productnum varchar(300),
    foreign key(userid) references user(userid),
    foreign key(productnum) references product(productnum)
+);
+
+create table orderlist(
+	ordernum_s varchar (10) default "D",
+    ordernum_i int,
+    productnum varchar(300),
+    orderdate datetime default now(),
+    userid varchar(300),
+    p_condition varchar(300) default "결제완료",
+    foreign key(userid) references user(userid),
+    constraint orderlist_PK primary key(ordernum_s,ordernum_i)
 );
 
    create table m_board(
@@ -58,8 +69,20 @@ create table qna(
 );
 
 create table reservation(
-   reservnum int auto_increment primary key,
-   userid varchar(300),
-   reservtime datetime,
-   foreign key(userid) references user(userid)
+reservnum int primary key auto_increment,
+username varchar(300),
+reservdate varchar(300),
+reservtime varchar(300),
+reservcontents varchar(1000)
 );
+
+drop table reservation;
+
+create table donate(
+donatenum int primary key auto_increment,
+name varchar(300),
+money varchar(300),
+content varchar(300),
+date datetime default now()
+);
+

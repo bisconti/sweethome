@@ -14,32 +14,36 @@
 </head>
 <body class="is-preload">
    <!-- Header -->
-   <header id="header">
-		<div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
-					id="logo"></a></div>
-		<div id="mypage">
-			<a href=""><img src="${cp}/resources/images/basicprofile.jpg" alt="" id="myprofile"></a>
-			<h5 id="welcome">환영합니다! <br>${user.username}님</h5>
-		</div>
-		<div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
-			<div class="dropbtn" id="help">MENU</div>
-               <div class="dropdown-content">
-                  <a href="#">커뮤니티</a>
-                  <a href="#">문의내역</a>
-                  <a href="#">마이페이지</a>
-                  <a href="${cp}/user/basket">나의장바구니</a>
-                  <a href="${cp}/user/order">주문내역</a>
-               </div>
-            </div>
-            <div id="logout">
-				<a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
-			</div>
-	</header>
+    <header id="header">
+      <div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
+               id="logo"></a></div>
+      <c:if test="${user.userid != null}">
+	      <div id="mypage">
+	         <a href=""><img src="${cp}/resources/images/${userphoto}" alt="" id="myprofile"></a>
+	         <h5 id="welcome">환영합니다! <br>${user.username}님</h5>
+	      </div>
+	      <div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
+	         <div class="dropbtn" id="help">MENU</div>
+	               <div class="dropdown-content">
+	                  <a href="#">커뮤니티</a>
+	                  <a href="#">문의내역</a>
+	                  <a href="${cp}/user/mypage">마이페이지</a>
+	                  <a href="${cp}/user/basket">나의장바구니</a>
+	                  <a href="${cp}/user/order">주문내역</a>
+	                 <c:if test="${user.userid.equals('manager')}">
+                  		<a href="${cp}/reserv/counsel?date=${today}">관리페이지</a>
+                  	  </c:if>
+	               </div>
+	            </div>
+	         <div id="logout">
+	            <a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
+	         </div>
+      </c:if>         
+   </header>
 <!-- Banner -->
    <div id="banner">
       <div class="wrapper style1 special">
-         <div class="board">
-            <h1 class="heading alt" style="color:mediumseagreen;">커뮤니티</h1>
+         <div class="board" style="margin-top: 100px; height: 993px;" >
             <a href="${cp}/board/list${cri.listLink}" style="float:right; color: mediumseagreen;">목록 보기</a>
             <div class="write_area" style="clear:both;">
                <form name="boardForm" method="post" action="${cp}/board/regist">
@@ -48,16 +52,17 @@
                   <input type="hidden" value="${cri.amount }" name="amount">
                   <input type="hidden" value="${cri.type }" name="type">
                   <input type="hidden" value="${cri.keyword }" name="keyword">
-                  <div class="col-12">
+                  <div class="col-12" style="height:150px;">
                      <h4>제목</h4>
-                     <input name="boardtitle" type="text" value="${board.boardtitle }" id="titlediv">
+                     <input type="hidden" value="${user.userid}" name="userid">
+                     <input name="boardtitle" type="text" value="${board.boardtitle}" id="titlediv">
                   </div>
-                  <div class="col-12">
-                     <h4>내용 <input name="userid" type="text" value="${user.userid}" style="width: 10%; float: right;" readonly></h4>  
-                     <textarea name="boardcontents" rows="10" id="contentdiv">${board.boardcontents}</textarea>
+                  <div class="col-12" style="height:600px;">
+                     <h4>내용</h4>  
+                     <textarea name="boardcontents" rows="10" id="contentdiv" style="height:500px; ">${board.boardcontents}</textarea>
                   </div>
-                  <div  style="width: 10%; margin:0 auto;">
-                     <input type="submit" value="등록" class="" style="margin-top:10px;">
+                  <div style="width: 10%; margin:0 auto;">
+                     <input type="submit" value="등록" class="" style="margin-top:10px; background-color: mediumseagreen;">
                   </div>
                </form>
             </div>
@@ -66,7 +71,7 @@
    </div>
       <!-- Footer -->
    <footer id="footer" class="wrapper alt">
-      <div class="inner">
+      <div class="inner" style="margin: 0 auto;">
          <div id="external_link">
             <div id="twitter">
                <a href="https://twitter.com"><img src="${cp}/resources/images/트위터.png" alt="" id="twitter_pic"></a>

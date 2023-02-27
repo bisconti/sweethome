@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sweethome.domain.Criteria;
 import com.sweethome.domain.DonateDTO;
+import com.sweethome.domain.KakaoDTO;
 import com.sweethome.domain.UserDTO;
 
 public interface UserService {
@@ -32,6 +33,8 @@ public interface UserService {
 	boolean updatephone(String userid, String userphone);
 	boolean userIdExist(String userId, HttpServletResponse resp) throws IOException;
 	int sendSMS(String userphone, HttpServletResponse resp) throws IOException;
-	boolean checkphone(String userphone);
+	boolean checkphone(String userphone, HttpServletResponse resp) throws IOException;
 	boolean changepw(String correntpw, String userpw, String userid);
+	void kJoin(KakaoDTO kuser, HttpServletResponse resp, HttpServletRequest req)throws IOException;
+	boolean adduserphoto(String userid, String userphoto, HttpServletRequest req, HttpServletResponse resp) throws IOException;
 }

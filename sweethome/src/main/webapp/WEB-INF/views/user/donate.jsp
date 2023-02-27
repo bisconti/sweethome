@@ -35,28 +35,33 @@
 <body class="is-preload">
 
    <!-- Header -->
-	<header id="header">
-		<div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
-					id="logo"></a></div>
-		<div id="mypage">
-			<a href=""><img src="${cp}/resources/images/basicprofile.jpg" alt="" id="myprofile"></a>
-			<h5 id="welcome">환영합니다! <br>${user.username}님</h5>
-		</div>
-		<div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
-			<div class="dropbtn" id="help">MENU</div>
-               <div class="dropdown-content">
-                  <a href="#">커뮤니티</a>
-                  <a href="#">문의내역</a>
-                  <a href="#">마이페이지</a>
-                  <a href="${cp}/user/basket">나의장바구니</a>
-                  <a href="${cp}/user/order">주문내역</a>
-               </div>
-            </div>
-            <div id="logout">
-				<a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
-			</div>
-	</header>
-	
+    <header id="header">
+      <div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
+               id="logo"></a></div>
+      <c:if test="${user.userid != null}">
+	      <div id="mypage">
+	         <a href=""><img src="${cp}/resources/images/${userphoto}" alt="" id="myprofile"></a>
+	         <h5 id="welcome">환영합니다! <br>${user.username}님</h5>
+	      </div>
+	      <div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
+	         <div class="dropbtn" id="help">MENU</div>
+	               <div class="dropdown-content">
+	                  <a href="#">커뮤니티</a>
+	                  <a href="#">문의내역</a>
+	                  <a href="${cp}/user/mypage">마이페이지</a>
+	                  <a href="${cp}/user/basket">나의장바구니</a>
+	                  <a href="${cp}/user/order">주문내역</a>
+	                 <c:if test="${user.userid.equals('manager')}">
+                  		<a href="${cp}/reserv/counsel?date=${today}">관리페이지</a>
+                  	  </c:if>
+	               </div>
+	            </div>
+	         <div id="logout">
+	            <a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
+	         </div>
+      </c:if>         
+   </header>
+   
    <div id="alll">
       <section id="main" class="wrapper">
          <div class="inner" style="margin: 0 auto; color: mediumseagreen !important;">
@@ -78,10 +83,10 @@
                <c:if test="${list != null and list.size() > 0 }">
                   <c:forEach items="${list}" var="donate">
                      <tr class="donate_list">
-                        <td id="content" class="content_black">${donate.name}</td>
-                        <td id="content1" class="content_black"><fmt:formatNumber
+                        <td id="content" class="content_black" style='border-bottom:1px solid mediumseagreen;'>${donate.name}</td>
+                        <td id="content1" class="content_;black" style='border-bottom: 1px solid mediumseagreen; color:black;'><fmt:formatNumber
                               value="${donate.money}" pattern="###,###,###" />원</td>
-                        <td id="content" class="content_black">${donate.content}</td>
+                        <td id="content" class="content_black" style='border-bottom: 1px solid mediumseagreen;'>${donate.content}</td>
                      </tr>
                   </c:forEach>
                </c:if>
@@ -146,7 +151,7 @@
       <nav class="page1">
          <ul class="pagination1">
             <c:if test="${pageMaker.prev}">
-               <li class="page-item1" id="previous" style="text-align: center;"><a class="changePage"
+               <li class="page-item1" id="previous" style="text-align: center;"><a style='color:mediumseagreen;' class="changePage"
                   href="${cp}/user/donate?pagenum=${pageMaker.startPage-1}&amount=${10}">
                      <span aria-hidden="true">&laquo;</span>
                </a></li>
@@ -154,15 +159,16 @@
             <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
                var="i">
                <c:if test="${i == pageMaker.cri.pagenum}">
-                  <li class="page-item1" style="color: mediumseagreen;"><h5>${i}</h5></li>
+                  <li class="page-item1" style="color: blue;"><a class="changePage" id="${i}"
+                     href="${cp}/user/donate?pagenum=${i}&amount=${10}"  onclick="return false;">${i}</a></li>
                </c:if>
                <c:if test="${i != pageMaker.cri.pagenum}">
-                  <li class="page-item1"><a class="changePage" id="${i}"
+                  <li class="page-item1"><a style='color:mediumseagreen;' class="changePage" id="${i}"
                      href="${cp}/user/donate?pagenum=${i}&amount=${10}">${i}</a></li>
                </c:if>
             </c:forEach>
             <c:if test="${pageMaker.next }">
-               <li class="page-item1" id="next"><a class="changePage"
+               <li class="page-item1" id="next"><a style='color:mediumseagreen;' class="changePage"
                   href="${cp}/user/donate?pagenum=${pageMaker.endPage + 1}&amount=${10}">
                      <span aria-hidden="true">&raquo;</span>
                </a></li>

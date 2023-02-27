@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.sweethome.domain.Criteria;
 import com.sweethome.domain.DonateDTO;
+import com.sweethome.domain.KakaoDTO;
 import com.sweethome.domain.OrderDTO;
 import com.sweethome.domain.ProductDTO;
 import com.sweethome.domain.UserDTO;
@@ -42,7 +43,10 @@ public interface UserMapper {
    boolean updatepw(@Param("userid")String userid, @Param("userpw")String userpw);
    int getUserAge(String userbirth);
    boolean updatephone(@Param("userid")String userid, @Param("userphone")String userphone);
-   boolean userIdExist(String userid);
-   boolean checkphone(String userphone);
+   int userIdExist(String userid);
+   int checkphone(String userphone);
    boolean changepw(@Param("correntpw")String correntpw, @Param("userpw")String userpw, @Param("userid")String userid);
+   boolean kJoin(KakaoDTO kuser);
+   boolean addPhoto(@Param("userid")String userid, @Param("userphoto")String userphoto);
+   String newProfile(String userid);
 }

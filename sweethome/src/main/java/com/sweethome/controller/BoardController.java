@@ -36,6 +36,7 @@ public class BoardController {
    public String regist(BoardDTO board, RedirectAttributes ra) {
       service.regist(board);
       Long boardnum = service.getMaxBoardnum(board.getUserid());
+      ra.addFlashAttribute("s","s");
       ra.addFlashAttribute("boardnum",boardnum);
       return "redirect:/board/list";
    }
@@ -54,8 +55,9 @@ public class BoardController {
       return "redirect:/board/get"+cri.getListLink()+"&boardnum="+board.getBoardnum();
    }
    @PostMapping("/remove")
-   public String remove(Long boardnum, Criteria cri) {
+   public String remove(Long boardnum, Criteria cri, RedirectAttributes ra) {
       service.remove(boardnum);
+      ra.addFlashAttribute("f","f");
       return "redirect:/board/list"+cri.getListLink();
    }
 }

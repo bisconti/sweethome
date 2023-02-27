@@ -1,11 +1,11 @@
 package com.sweethome.controller;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sweethome.domain.Criteria;
+import com.sweethome.domain.KakaoDTO;
 import com.sweethome.domain.PageDTO;
 import com.sweethome.domain.UserDTO;
 import com.sweethome.service.UserService;
@@ -64,10 +65,12 @@ public class UserController {
 	@PostMapping("/doorder")
 	public String doorder(String userid, HttpServletRequest req) {
 		if (service.doorder(userid, req)) {
-			return "home";
+            req.setAttribute("successMessage", "상품 주문이 완료되었습니다!");
+            return "successPage";
 		}
 		else {
-			return "/user/basket";
+            req.setAttribute("errorMessage", "상품 주문에 실패하였습니다. 다시 시도해주세요.");
+            return "errorPage";
 		}
 	}
 	
@@ -84,10 +87,12 @@ public class UserController {
 	@PostMapping("/modifyorder")
 	public String modifyorder(String userid, HttpServletRequest req) {
 		if (service.modifyorder(userid, req)) {
-			return "/user/order";
+            req.setAttribute("successMessage", "상품이 취소되었습니다!");
+            return "modifyorder";
 		}
 		else {
-			return "/user/order";
+            req.setAttribute("errorMessage", "상품 취소 실패!");
+            return "errorPage";
 		}
 	}
 	
@@ -96,14 +101,17 @@ public class UserController {
 	      model.addAttribute("list",service.getList(cri));
 	      model.addAttribute("pageMaker",new PageDTO(service.getTotal(cri), cri));
 	   }
-	   @PostMapping("/donateaction")
-	   public String donate(String name, String money, String content) {
-	      if(service.donateaction(name, money, content)) {
+	      @PostMapping("/donateaction")
+	      public String donate(String name, String money, String content,HttpServletRequest req) {
+	         if(service.donateaction(name, money, content)) {
+	            req.setAttribute("successMessage", "후원이 완료되었습니다!");
+	            return "donateOk";
+	         }
+	         else {
+	            req.setAttribute("errorMessage", "후원에 실패하였습니다 다시 시도해주세요.");
+	             return "errorPage";
+	         }
 	      }
-	      else {
-	      }
-	      return "home";
-	   }
 
 	   @PostMapping("/login")
 	   public String login(String userid, String userpw, HttpServletRequest req, RedirectAttributes ra) {
@@ -121,13 +129,16 @@ public class UserController {
 	   }
 	   
 	   @PostMapping("/join")
-	   public String join(UserDTO user, HttpServletResponse resp) {
+	   public String join(UserDTO user, HttpServletResponse resp, HttpServletRequest req) {
+		   System.out.println(user.getUserid());
 	      if(service.join(user)) {
-	         Cookie cookie = new Cookie("joinid", user.getUserid());
-	         cookie.setMaxAge(300);
-	         resp.addCookie(cookie);
+	         req.setAttribute("successMessage", "회원가입 성공 !");
+		     return "successPage";
+	      } else {
+	    	  req.setAttribute("errorMessage", "회원가입 실패 !");
+		         return "errorPage"; 
 	      }
-	      return "redirect:/";
+		
 	   }
 	   
 	   @PostMapping("/checkid")
@@ -179,7 +190,7 @@ public class UserController {
 	         return "successPage";
 	      } else {
 	         req.setAttribute("errorMessage", "비밀번호 변경에 실패하였습니다.");
-	         return "/user/errorPage";
+	         return "errorPage";
 	      }
 	   }
 	   
@@ -190,20 +201,14 @@ public class UserController {
 	         return "successPage";
 	      } else {
 	         req.setAttribute("errorMessage", "비밀번호 변경에 실패하였습니다.");
-	         return "/user/errorPage";
+	         return "errorPage";
 	      }
 	   }
 	   
 	   @GetMapping("/overlapidok")
 	   public String overlapIdOk(@RequestParam("userid") String userid, HttpServletResponse resp) throws IOException {
-	      if(service.userIdExist(userid, resp)) {
-	         System.out.println("어디로 나오는지");
-	         return "X";
-	      } else {
-	         System.out.println("보자");
-	         return "O";
-	      }
-	      
+	      service.userIdExist(userid, resp);
+	      return null;
 	      
 	   }
 	   
@@ -212,13 +217,32 @@ public class UserController {
 	     service.sendSMS(userphone, resp);
 	      return null;
 	   }
+	   
 	   @GetMapping("/checkphoneok")
 	   @ResponseBody
-	   public String checkPhoneOk(String userphone) {
-	      if(service.checkphone(userphone)) {
-	         return "X";
-	      } else {
-	         return "O";
-	      }
+	   public void checkPhoneOk(String userphone, HttpServletResponse resp) throws IOException {
+	      service.checkphone(userphone, resp);
+	   }
+	   
+	   @PostMapping("/kakaoSignUp")
+	   public void kakaoSignUp(KakaoDTO kuser, HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		   System.out.println("kJoin 전");
+		   service.kJoin(kuser, resp, req);
+		   System.out.println("KJoin 후");
+	   }
+	   
+	   @PostMapping("/adduserphoto")
+	   public String adduserphoto(String userid, String userphoto, HttpServletRequest req, HttpServletResponse resp, RedirectAttributes ra)throws Exception{
+		   System.out.println("userid : "+ userid);
+		   HttpSession session = req.getSession();
+		   UserDTO user = (UserDTO)session.getAttribute("user");
+		   System.out.println(user.getUserid());
+		   userid = user.getUserid();
+		   if(service.adduserphoto(userid, userphoto, req, resp)) {
+			   	 ra.addFlashAttribute("z","z");
+		      } else {
+		    	  ra.addFlashAttribute("c","c");
+		      }
+		   return "redirect:/user/mypage";
 	   }
 }

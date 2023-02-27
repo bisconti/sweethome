@@ -57,7 +57,8 @@
       insert into donate(name,money,content) values(#{name},#{money},#{content})
    </insert>
    <insert id="join">
-      insert into user values(#{userid},md5(#{userpw}),#{username}, #{usergender},#{zipcode},#{usergender}, #{useraddr},#{useraddrdetail},#{useraddretc},#{userbirth},#{userphone})
+     insert into user (userid,userpw,username,usergender,zipcode,useraddr,useraddrdetail,useraddretc,userbirth,userphone)values(#{userid},#{userpw},#{username},#{usergender},
+      #{zipcode},#{useraddr},#{useraddrdetail},#{useraddretc},#{userbirth}, #{userphone})
    </insert>
    <select id="login" resultType="com.sweethome.domain.UserDTO">
       select * from user where userid=#{userid} and userpw=#{userpw}
@@ -78,8 +79,8 @@
       SELECT FLOOR( (CAST(REPLACE(CURRENT_DATE,'-','') AS UNSIGNED) - 
        CAST(REPLACE(#{userbirth},'-','') AS UNSIGNED)) / 10000 );
    </select>
-   <select id ="userIdExist" resultType="string">
-         select userid from user where userid=#{userid}
+   <select id ="userIdExist" resultType="_int">
+         select count(*) from user where userid=#{userid}
    </select>
    <select id="checkphone" resultType="_int">
          select count(*) from user where userphone=#{userphone}
@@ -87,5 +88,13 @@
    <update id="changepw">
          update user set userpw=#{userpw} where userid=#{userid} and userpw=#{correntpw}
    </update>
-   
+    <insert id="kJoin">
+   		insert into k_user (userid, username, email) values(#{kuser.userid},#{kuser.username},#{kuser.email})
+   </insert>
+   <update id="addPhoto">
+   		update user set userphoto = #{userphoto} where userid = #{userid}
+   </update>
+    <select id="newProfile" resultType="string">
+   		select userphoto from user where userid=#{userid}
+   </select>
 </mapper>

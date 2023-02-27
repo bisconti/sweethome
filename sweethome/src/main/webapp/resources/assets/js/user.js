@@ -118,37 +118,39 @@ function sendit(){
     }
     return true;
 }
-function checkId(){
-   const xhr = new XMLHttpRequest();
-   const result = document.getElementById("result");
-   const userid = document.joinForm.userid;
-   if(userid.value == ""){
-      alert("아이디를 입력하세요!");
-      userid.focus();
-      return false;
-   }
-   
-   xhr.onreadystatechange = function(){
-      if(xhr.readyState == 4){
-         if(xhr.status == 200){
-            let txt = xhr.responseText;
-            txt = txt.trim();
-            if(txt == "O"){
-               result.innerHTML = "사용할 수 있는 아이디입니다!";
-               
-            }
-            else{
-               result.innerHTML = "중복된 아이디가 있습니다!";
-               userid.value = "";
-               userid.focus();
-            }
-         }
-      }
-   }
-   
-   xhr.open("GET",cp+"/user/overlapidok?userid="+userid.value,true);
-   xhr.send();
-}
+function checkId() {
+	   const xhr = new XMLHttpRequest();
+	   const joinForm = document.joinForm;
+	   const result = joinForm.querySelector('#result');
+	   const userid = joinForm.querySelector('[name="userid"]');
+	   if (userid.value == "") {
+	      alert("아이디를 입력하세요!");
+	      userid.focus();
+	      return false;
+	   }
+	   
+	   xhr.onreadystatechange = function(){
+	      if (xhr.readyState == 4){
+	         if (xhr.status == 200){
+	            let txt = xhr.responseText;
+	            txt = txt.trim();
+	            if (txt == "O"){
+	               result.innerHTML = "사용할 수 있는 아이디입니다!";
+	            }
+	            else {
+	               result.innerHTML = "중복된 아이디가 있습니다!";
+	               userid.value = "";
+	               userid.focus();
+	            }
+	         } else {
+	            result.innerHTML = "오류 발생: " + xhr.status;
+	         }
+	      }
+	   }
+	   
+	   xhr.open("GET", cp+"/user/overlapidok?userid="+userid.value, true);
+	   xhr.send();
+	}
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
