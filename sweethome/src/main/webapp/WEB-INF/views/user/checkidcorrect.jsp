@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!DOCTYPE HTML>
 <html>
 <head>
     <title>Untitled</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript>
-        <link rel="stylesheet" href="assets/css/noscript.css" />
-    </noscript>
+    <link rel="stylesheet" href="${cp}/resources/assets/css/main.css" />
+    <link rel="stylesheet" href="${cp}/resources/assets/css/noscript.css" />
 </head>
 <style>
     input {
@@ -49,26 +48,32 @@
 <body class="is-preload">
 
        <!-- Header -->
-	<header id="header">
-		<div id="logobox"><a href="index.html" class="title" id="logo_"><img src="./images/sweethome.png" alt="사진"
-					id="logo"></a></div>
-		<div id="mypage">
-			<a href=""><img src="./images/basicprofile.jpg" alt="" id="myprofile"></a>
-			<h5 id="welcome">환영합니다! <br>유저님</h5>
-		</div>
-		<div class="dropdown">
-			<div class="dropbtn">MENU</div>
-			<div class="dropdown-content">
-				<a href="">커뮤니티</a>
-				<a href="/contactus/email_index">문의내역</a>
-				<a href="/map/map_index">마이페이지</a>
-				<a href="/map/map_index">나의 장바구니</a>
-			</div>
-		</div>
-		<div id="logout">
-			<a href=""><input type="button" value="로그아웃"></a>
-		</div>
-	</header>
+    <header id="header">
+      <div id="logobox"><a href="${cp}/" class="title" id="logo_"><img src="${cp}/resources/images/sweethome.png" alt="사진"
+               id="logo"></a></div>
+      <c:if test="${user.userid != null}">
+	      <div id="mypage">
+	         <a href=""><img src="${cp}/resources/images/${userphoto}" alt="" id="myprofile"></a>
+	         <h5 id="welcome">환영합니다! <br>${user.username}님</h5>
+	      </div>
+	      <div class="dropdown help" onmouseover="helphover()" onmouseout="helphoverout()">
+	         <div class="dropbtn" id="help">MENU</div>
+	               <div class="dropdown-content">
+	                  <a href="#">커뮤니티</a>
+	                  <a href="#">문의내역</a>
+	                  <a href="${cp}/user/mypage">마이페이지</a>
+	                  <a href="${cp}/user/basket">나의장바구니</a>
+	                  <a href="${cp}/user/order">주문내역</a>
+	                 <c:if test="${user.userid.equals('manager')}">
+                  		<a href="${cp}/reserv/counsel?date=${today}">관리페이지</a>
+                  	  </c:if>
+	               </div>
+	            </div>
+	         <div id="logout">
+	            <a href="${cp}/user/logout"><input type="button" value="로그아웃"></a>
+	         </div>
+      </c:if>         
+   </header>
     <!-- Wrapper -->
     <div id="wrapper">
         <!-- Main -->
@@ -87,7 +92,7 @@
             </fieldset>
         </div>
         <div class="pw_Search idsearchbox login">
-            <a href="${cp}/user/searchpw.us" class="checkpw">비밀번호찾기</a>
+            <a href="${cp}/user/checkpw" class="checkpw">비밀번호찾기</a>
         </div>
     </div>
 
@@ -99,16 +104,16 @@
     <div class="inner">
         <div id="external_link">
             <div id="twitter">
-                <a href="https://twitter.com"><img src="./images/트위터.png" alt="" id="twitter_pic"></a>
+                <a href="https://twitter.com"><img src="${cp}/resources/images/트위터.png" alt="" id="twitter_pic"></a>
             </div>
             <div id="facebook">
-                <a href="https://facebook.com"><img src="./images/페이스북.png" alt="" id="facebook_pic"></a>
+                <a href="https://facebook.com"><img src="${cp}/resources/images/페이스북.png" alt="" id="facebook_pic"></a>
             </div>
             <div id="instagram">
-                <a href="https://instagram.com"><img src="./images/인스타그램.png" alt="" id="instagram_pic"></a>
+                <a href="https://instagram.com"><img src="${cp}/resources/images/인스타그램.png" alt="" id="instagram_pic"></a>
             </div>
             <div id="youtube">
-                <a href="https://youtube.com"><img src="./images/유튜브.png" alt="" id="youtube_pic"></a>
+                <a href="https://youtube.com"><img src="${cp}/resources/images/유튜브.png" alt="" id="youtube_pic"></a>
             </div>
         </div>
         <ul class="menu">
@@ -122,14 +127,12 @@
 </footer>
 
     <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
-
+    <script src="${cp}/resources/assets/js/jquery.min.js"></script>
+    <script src="${cp}/resources/assets/js/jquery.scrollex.min.js"></script>
+    <script src="${cp}/resources/assets/js/jquery.scrolly.min.js"></script>
+    <script src="${cp}/resources/assets/js/browser.min.js"></script>
+    <script src="${cp}/resources/assets/js/breakpoints.min.js"></script>
+    <script src="${cp}/resources/assets/js/util.js"></script>
+    <script src="${cp}/resources/assets/js/main.js"></script>
 </body>
-
 </html>
